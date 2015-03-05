@@ -1,0 +1,8 @@
+issue_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: IssueBundle:Default:index }
+
+oro_issue_bundle:
+    resource:     "@IssueBundle/Controller"
+    type:         annotation
+    prefix:       /issue

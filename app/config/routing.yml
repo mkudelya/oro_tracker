@@ -1,3 +1,7 @@
+issue:
+    resource: "@IssueBundle/Resources/config/routing.yml"
+    prefix:   /
+
 #
 # 3rd party routes
 #
