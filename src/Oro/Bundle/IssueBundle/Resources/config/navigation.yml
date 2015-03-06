@@ -1,0 +1,21 @@
+oro_menu_config:
+    items:
+        issue_list:
+            label: 'oro.issue.entity_plural.label'
+            route: 'oro_issue_index'
+#            extras:
+#                position: 10
+#                routes: ['orocrm_issue_update', 'orocrm_issue_create', 'orocrm_issue_view']
+#                description: 'orocrm.issue.menu.issue_list.description'
+
+#        orocrm_issue_my_issues:
+#            label: 'orocrm.issue.menu.my_issues'
+#            route: 'orocrm_issue_my_issues'
+#            extras:
+#                position: 15
+    tree:
+        application_menu:
+            children:
+                activities_tab:
+                    children:
+                        issue_list: ~

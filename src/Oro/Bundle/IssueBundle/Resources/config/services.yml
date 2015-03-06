@@ -1,0 +1,9 @@
+parameters:
+    oro_issue.entity.class: Oro\Bundle\IssueBundle\Entity\Issue
+    oro_issue.grid_helper.class: Oro\Bundle\IssueBundle\Datagrid\GridHelper
+
+services:
+    oro_issue.grid_helper:
+        class: %oro_issue.grid_helper.class%
+        arguments:
+            - @doctrine.orm.entity_manager

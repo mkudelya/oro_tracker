@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\UserBundle\Entity\User;
 use Oro\Bundle\IssueBundle\Model\ExtendIssue;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
@@ -66,9 +67,14 @@ class Issue extends ExtendIssue implements Taggable
     protected $summary;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    protected $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="IssuePriority")
@@ -146,12 +152,12 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $created;
+    protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $updated;
+    protected $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
@@ -164,7 +170,6 @@ class Issue extends ExtendIssue implements Taggable
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
      */
     protected $organization;
-
 
     /**
      * Constructor
@@ -222,6 +227,10 @@ class Issue extends ExtendIssue implements Taggable
      */
     public function setCode($code)
     {
+        if (!empty($code)) {
+            $code = strtoupper(preg_replace('/[^a-zA-z_-\d]+/', '', $code));
+        }
+
         $this->code = $code;
 
         return $this;
@@ -289,9 +298,9 @@ class Issue extends ExtendIssue implements Taggable
      * @param \DateTime $created
      * @return Issue
      */
-    public function setCreated($created)
+    public function setCreatedAt($created)
     {
-        $this->created = $created;
+        $this->createdAt = $created;
 
         return $this;
     }
@@ -301,9 +310,9 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @return \DateTime 
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->createdAt;
     }
 
     /**
@@ -312,9 +321,9 @@ class Issue extends ExtendIssue implements Taggable
      * @param \DateTime $updated
      * @return Issue
      */
-    public function setUpdated($updated)
+    public function setUpdatedAt($updated)
     {
-        $this->updated = $updated;
+        $this->updatedAt = $updated;
 
         return $this;
     }
@@ -324,9 +333,9 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @return \DateTime 
      */
-    public function getUpdated()
+    public function getUpdatedAt()
     {
-        return $this->updated;
+        return $this->updatedAt;
     }
 
     /**
@@ -468,14 +477,16 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Add related
+     * Set related
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\Issue $related
+     * @param ArrayCollection $related
      * @return Issue
      */
-    public function addRelated(\Oro\Bundle\IssueBundle\Entity\Issue $related)
+    public function setRelated($related)
     {
-        $this->related[] = $related;
+        if ($related instanceof ArrayCollection) {
+            $this->related[] = $related;
+        }
 
         return $this;
     }
@@ -485,7 +496,7 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $related
      */
-    public function removeRelated(\Oro\Bundle\IssueBundle\Entity\Issue $related)
+    public function removeRelated(Issue $related)
     {
         $this->related->removeElement($related);
     }
@@ -501,12 +512,12 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Add collaborator
+     * Set collaborator
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
+     * @param ArrayCollection $collaborator
      * @return Issue
      */
-    public function addCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborator)
+    public function setCollaborator(ArrayCollection $collaborator)
     {
         $this->collaborator[] = $collaborator;
 
@@ -518,7 +529,7 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
      */
-    public function removeCollaborator(\Oro\Bundle\UserBundle\Entity\User $collaborator)
+    public function removeCollaborator(User $collaborator)
     {
         $this->collaborator->removeElement($collaborator);
     }
@@ -557,12 +568,12 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Add children
+     * Set children
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\Issue $children
+     * @param ArrayCollection $children
      * @return Issue
      */
-    public function addChild(\Oro\Bundle\IssueBundle\Entity\Issue $children)
+    public function setChild(ArrayCollection $children)
     {
         $this->children[] = $children;
 
@@ -574,7 +585,7 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $children
      */
-    public function removeChild(\Oro\Bundle\IssueBundle\Entity\Issue $children)
+    public function removeChild(Issue $children)
     {
         $this->children->removeElement($children);
     }
@@ -615,10 +626,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set organization
      *
-     * @param \Oro\Bundle\OrganizationBundle\Entity\Organization $organization
+     * @param Organization $organization
      * @return Issue
      */
-    public function setOrganization(\Oro\Bundle\OrganizationBundle\Entity\Organization $organization = null)
+    public function setOrganization(Organization $organization = null)
     {
         $this->organization = $organization;
 
@@ -633,5 +644,49 @@ class Issue extends ExtendIssue implements Taggable
     public function getOrganization()
     {
         return $this->organization;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Issue
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string 
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updatedTimestamps()
+    {
+        $this->setUpdatedAt(new \DateTime('now', new \DateTimeZone('UTC')));
+
+        if ($this->getCreatedAt() == null) {
+            $this->setCreatedAt(new \DateTime('now', new \DateTimeZone('UTC')));
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getSummary();
     }
 }

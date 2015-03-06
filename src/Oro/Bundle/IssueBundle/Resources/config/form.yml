@@ -1,0 +1,60 @@
+parameters:
+    oro_issue.form.type.issue.class:              Oro\Bundle\IssueBundle\Form\Type\IssueType
+    oro_issue.form.type.issue_api.class:          Oro\Bundle\IssueBundle\Form\Type\IssueApiType
+    oro_issue.form.handler.issue.class:           Oro\Bundle\IssueBundle\Form\Handler\IssueHandler
+    oro_issue.form.handler.issue_api.class:       Oro\Bundle\IssueBundle\Form\Handler\IssueApiHandler
+    oro_issue.manager.api.class:                  Oro\Bundle\SoapBundle\Entity\Manager\ApiEntityManager
+
+services:
+    oro_issue.form.type.issue:
+        class: %oro_issue.form.type.issue.class%
+        tags:
+            - { name: form.type, alias: oro_issue }
+
+    oro_issue.form.type.issue_api:
+        class: %oro_issue.form.type.issue_api.class%
+        tags:
+            - { name: form.type, alias: oro_issue_api }
+
+    oro_issue.form:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'oro_issue'
+            - 'oro_issue'
+
+    oro_issue.form.api:
+        class: Symfony\Component\Form\Form
+        factory_method: createNamed
+        factory_service: form.factory
+        arguments:
+            - 'oro_issue_api'
+            - 'oro_issue_api'
+
+    oro_issue.form.handler.issue:
+        class: %oro_issue.form.handler.issue.class%
+        scope: request
+        arguments:
+            - @oro_issue.form
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_activity.manager
+            - @oro_entity.routing_helper
+
+    oro_issue.form.handler.issue.api:
+        class: %oro_issue.form.handler.issue_api.class%
+        scope: request
+        arguments:
+            - @oro_issue.form.api
+            - @request
+            - @doctrine.orm.entity_manager
+            - @oro_activity.manager
+            - @oro_entity.routing_helper
+
+    oro_issue.manager.api:
+        class: %oro_issue.manager.api.class%
+        parent: oro_soap.manager.entity_manager.abstract
+        arguments:
+            - %oro_issue.entity.class%
+            - @doctrine.orm.entity_manager

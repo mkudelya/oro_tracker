@@ -1,0 +1,18 @@
+oro:
+    issue:
+        entity.label: Issue
+        entity_plural.label: Issues
+        code.label: Code
+        type.label: Type
+        description.label: Description
+        related.label: Related
+        summary.label: Summary
+        priority.label: Priority
+        resolution.label: Resolution
+        organization.label: Organization
+        reporter.label: Reporter
+        assignee.label: Assignee
+        owner.label: Owner
+        created.label: Created
+        updated.label: Updated
+        workflow_step.label: Status

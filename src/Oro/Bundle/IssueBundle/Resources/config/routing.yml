@@ -1,8 +1,13 @@
-issue_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: IssueBundle:Default:index }
-
 oro_issue_bundle:
     resource:     "@IssueBundle/Controller"
     type:         annotation
     prefix:       /issue
+
+oro_issue_bundle_api:
+    resource:     "@IssueBundle/Controller/Api/Rest/IssueController.php"
+    type:         rest
+    prefix:       /issue/api/rest/{version}
+    requirements:
+        version:  latest|v1
+    defaults:
+        version:  latest

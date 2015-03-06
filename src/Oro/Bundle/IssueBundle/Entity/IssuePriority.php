@@ -110,4 +110,9 @@ class IssuePriority
     {
         return $this->order;
     }
+
+    public function __toString()
+    {
+        return (string) $this->getLabel();
+    }
 }

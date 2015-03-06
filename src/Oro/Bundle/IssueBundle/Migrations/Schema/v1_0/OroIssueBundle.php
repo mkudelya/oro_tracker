@@ -51,9 +51,10 @@ class OroIssueBundle implements Migration
         $table->addColumn('reporter_id', 'integer', ['notnull' => false]);
         $table->addColumn('code', 'string', ['length' => 255]);
         $table->addColumn('summary', 'string', ['length' => 255]);
-        $table->addColumn('description', 'text', []);
-        $table->addColumn('created', 'datetime', []);
-        $table->addColumn('updated', 'datetime', []);
+        $table->addColumn('type', 'string', ['length' => 255]);
+        $table->addColumn('description', 'text', ['notnull' => false]);
+        $table->addColumn('createdAt', 'datetime', []);
+        $table->addColumn('updatedAt', 'datetime', []);
         $table->setPrimaryKey(['id']);
         $table->addUniqueIndex(['code'], 'UNIQ_46A8C3E677153098');
         $table->addUniqueIndex(['workflow_item_id'], 'UNIQ_46A8C3E61023C4EE');

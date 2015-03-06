@@ -1,0 +1,184 @@
+datagrid:
+    issue-grid:
+        extended_entity_name: %oro_issue.entity.class%
+        source:
+            type: orm
+            acl_resource: oro_issue_view
+            query:
+                select:
+                    - issue.id
+                    - issue.code
+                    - issue.type
+                    - issue.summary
+                    - issuePriority.label as priorityLabel
+                    - issueResolution.label as resolutionLabel
+                    - issueOrganization.name as issueOrganizationName
+                    - CONCAT(issueReporter.firstName, CONCAT(' ', issueReporter.lastName)) as issueReporterName
+                    - CONCAT(issueAssignee.firstName, CONCAT(' ', issueAssignee.lastName)) as issueAssigneeName
+                    - CONCAT(owner.firstName, CONCAT(' ', owner.lastName)) as ownerName
+                    - owner.id as ownerId
+                    - issueAssignee.id assigneeId
+                    - issueReporter.id reporterId
+                    - issue.createdAt
+                    - issue.updatedAt
+                    - workflowStep.label as workflowStepLabel
+                from:
+                    - { table: %oro_issue.entity.class%, alias: issue }
+                join:
+                    left:
+                        - { join: issue.priority, alias: issuePriority }
+                        - { join: issue.resolution, alias: issueResolution }
+                        - { join: issue.owner, alias: owner }
+                        - { join: issue.workflowStep, alias: workflowStep }
+                        - { join: issue.reporter, alias: issueReporter }
+                        - { join: issue.assignee, alias: issueAssignee }
+                        - { join: issue.organization, alias: issueOrganization }
+        columns:
+            code:
+                label:         oro.issue.code.label
+            type:
+                label:         oro.issue.type.label
+            summary:
+                label:         oro.issue.summary.label
+            priorityLabel:
+                label:         oro.issue.priority.label
+            resolutionLabel:
+                label:         oro.issue.resolution.label
+            issueOrganizationName:
+                label:         oro.issue.organization.label
+            issueReporterName:
+                type:          twig
+                label:         oro.issue.reporter.label
+                frontend_type: html
+                template:      IssueBundle:Issue:Datagrid/Property/reporter.html.twig
+            issueAssigneeName:
+                type:          twig
+                label:         oro.issue.assignee.label
+                frontend_type: html
+                template:      IssueBundle:Issue:Datagrid/Property/assignee.html.twig
+            ownerName:
+                type:          twig
+                label:         oro.issue.owner.label
+                frontend_type: html
+                template:      IssueBundle:Issue:Datagrid/Property/owner.html.twig
+            createdAt:
+                label:         oro.issue.created.label
+                frontend_type: datetime
+            updatedAt:
+                label:         oro.issue.updated.label
+                frontend_type: datetime
+            workflowStepLabel:
+                label:         oro.issue.workflow_step.label
+        sorters:
+            columns:
+                code:
+                    data_name: issue.code
+                type:
+                    data_name: issue.type
+                summary:
+                    data_name: issue.summary
+                priorityLabel:
+                    data_name: issuePriority.order
+                resolutionLabel:
+                    data_name: resolutionLabel
+                issueOrganizationName:
+                    data_name: issueOrganizationName
+                issueReporterName:
+                    data_name: issueReporterName
+                issueAssigneeName:
+                    data_name: issueAssigneeName
+                ownerName:
+                    data_name: ownerName
+                createdAt:
+                    data_name: issue.created
+                updatedAt:
+                    data_name: issue.updated
+                workflowStepLabel:
+                    data_name: workflowStep.stepOrder
+        filters:
+            columns:
+                code:
+                    type:      string
+                    data_name: issue.code
+                type:
+                    type:      choice
+                    data_name: issue.type
+                    options:
+                        field_options:
+                            choices: @oro_issue.grid_helper->getTypeChoices
+                            translatable_options: false
+                summary:
+                    type:      string
+                    data_name: issue.summary
+                priority:
+                    label:     Priority
+                    type:      choice
+                    data_name: issuePriority.name
+                    options:
+                        field_options:
+                            choices: @oro_issue.grid_helper->getPriorityChoices()
+                resolution:
+                    label:     Resolution
+                    type:      choice
+                    data_name: issue.resolution
+                    options:
+                        field_options:
+                            choices: @oro_issue.grid_helper->getResolutionChoices()
+                organization:
+                    label:     Organization
+                    type:      string
+                    data_name: issueOrganizationName
+                reporter:
+                    label:     Reporter
+                    type:      string
+                    data_name: issueReporterName
+                assignee:
+                    label:     Assignee
+                    type:      string
+                    data_name: issueAssigneeName
+                owner:
+                    label:     Owner
+                    type:      string
+                    data_name: ownerName
+                createdAt:
+                    type:      datetime
+                    data_name: issue.createdAt
+                updatedAt:
+                    type:      datetime
+                    data_name: issue.updatedAt
+        properties:
+            id: ~
+            view_link:
+                type:       url
+                route:      oro_issue_view
+                params:     [ id ]
+            update_link:
+                type:       url
+                route:      oro_issue_update
+                params:     [ id ]
+            delete_link:
+                type:       url
+                route:      oro_api_delete_issue
+                params:     [ id ]
+        actions:
+            view:
+                type:          navigate
+                acl_resource:  oro_issue_view
+                label:         oro.grid.action.view
+                icon:          eye-open
+                link:          view_link
+                rowAction:     true
+            update:
+                type:          navigate
+                acl_resource:  oro_issue_update
+                label:         oro.grid.action.update
+                icon:          edit
+                link:          update_link
+            delete:
+                type:          delete
+                acl_resource:  oro_issue_delete
+                label:         oro.grid.action.delete
+                icon:          trash
+                link:          delete_link
+        options:
+            entity_pagination: true
