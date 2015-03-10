@@ -1,0 +1,33 @@
+workflows:
+    issue_flow:
+        transitions:
+            start_progress:
+                label: 'Start progress'
+                step_to: in_progress
+                frontend_options:
+                    icon: 'icon-play'
+                transition_definition: start_progress_definition
+            stop_progress:
+                label: 'Stop progress'
+                step_to: open
+                frontend_options:
+                    icon: 'icon-stop'
+                transition_definition: stop_progress_definition
+            resolve:
+                label: 'Resolve'
+                step_to: resolved
+                frontend_options:
+                    icon: 'icon-stop'
+                transition_definition: resolve_definition
+            close:
+                label: 'Close'
+                step_to: closed
+                frontend_options:
+                    icon: 'icon-ok'
+                transition_definition: closed_definition
+            reopen:
+                label: 'Reopen'
+                step_to: open
+                frontend_options:
+                    icon: 'icon-edit'
+                transition_definition: reopen_definition

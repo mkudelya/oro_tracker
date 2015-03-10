@@ -42,7 +42,7 @@ use Oro\Bundle\TagBundle\Entity\Taggable;
  *              "auditable"=true
  *          },
  *          "workflow"={
- *              "active_workflow"="oro_issue_flow"
+ *              "active_workflow"="issue_flow"
  *          }
  *      }
  * )

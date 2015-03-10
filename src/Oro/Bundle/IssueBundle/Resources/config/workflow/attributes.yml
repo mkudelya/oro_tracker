@@ -1,0 +1,3 @@
+workflows:
+    issue_flow:
+        attributes: ~

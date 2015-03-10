@@ -1,0 +1,12 @@
+imports:
+    - { resource: 'steps.yml' }
+    - { resource: 'attributes.yml' }
+    - { resource: 'transitions.yml' }
+    - { resource: 'transition_definitions.yml' }
+
+workflows:
+    issue_flow:
+        label: 'Issue'
+        entity: Oro\Bundle\IssueBundle\Entity\Issue
+        entity_attribute: issue
+        start_step: open
