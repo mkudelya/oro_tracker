@@ -1,6 +1,7 @@
 oro:
     issue:
         entity.label: Issue
+        subentity.label: Sub-Issue
         entity_plural.label: Issues
         code.label: Code
         type.label: Type

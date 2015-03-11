@@ -64,10 +64,10 @@ class IssueHandler
      * Process form
      *
      * @param Issue $entity
-     *
+     * @param string $parentIssueCode
      * @return bool  True on successful processing, false otherwise
      */
-    public function process(Issue $entity)
+    public function process(Issue $entity, $parentIssueCode)
     {
         $action            = $this->entityRoutingHelper->getAction($this->request);
         $targetEntityClass = $this->entityRoutingHelper->getEntityClassName($this->request);
@@ -91,6 +91,12 @@ class IssueHandler
             $this->form->submit($this->request);
 
             if ($this->form->isValid()) {
+
+                if (!is_null($parentIssueCode)) {
+                    $parent = $this->manager->getRepository('IssueBundle:Issue')->findOneByCode($parentIssueCode);
+                    $entity->setParent($parent);
+                }
+
                 $this->onSuccess($entity);
                 return true;
             }
