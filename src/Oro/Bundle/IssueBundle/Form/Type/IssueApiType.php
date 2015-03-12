@@ -35,6 +35,6 @@ class IssueApiType extends IssueType
      */
     public function getName()
     {
-        return 'issue';
+        return 'oro_issue_api';
     }
 }
