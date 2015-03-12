@@ -10,7 +10,6 @@ class AppKernel extends OroKernel
     {
         $bundles = array(
         // bundles,
-            new Oro\Bundle\IssueBundle\OroIssueBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev'))) {

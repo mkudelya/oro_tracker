@@ -6,7 +6,7 @@ oro_issue_bundle:
 oro_issue_bundle_api:
     resource:     "@OroIssueBundle/Controller/Api/Rest/IssueController.php"
     type:         rest
-    prefix:       /issue/api/rest/{version}
+    prefix:       api/rest/{version}/
     requirements:
         version:  latest|v1
     defaults:

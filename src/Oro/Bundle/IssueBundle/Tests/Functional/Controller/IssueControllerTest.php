@@ -35,6 +35,22 @@ class IssueControllersTest extends WebTestCase
     /**
      * @depends testCreate
      */
+    public function testIndex()
+    {
+        $response = $this->client->requestGrid(
+            'issue-grid',
+            array('issue-grid[_filter][code][value]' => 'NEWCODE')
+        );
+
+        $result = $this->getJsonResponseContent($response, 200);
+        $result = reset($result['data']);
+
+        $this->assertContains("NEWCODE", $result['code']);
+    }
+
+    /**
+     * @depends testCreate
+     */
     public function testUpdate()
     {
         $response = $this->client->requestGrid(
