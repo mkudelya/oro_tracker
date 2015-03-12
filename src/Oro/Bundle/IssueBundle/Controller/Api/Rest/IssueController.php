@@ -154,7 +154,7 @@ class IssueController extends RestController
      *      id="oro_issue_delete",
      *      type="entity",
      *      permission="DELETE",
-     *      class="IssueBundle:Issue"
+     *      class="OroIssueBundle:Issue"
      * )
      * @return Response
      */

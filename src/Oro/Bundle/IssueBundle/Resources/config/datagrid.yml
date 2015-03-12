@@ -44,12 +44,12 @@ datagrid:
                 type:          twig
                 label:         oro.issue.reporter.label
                 frontend_type: html
-                template:      IssueBundle:Issue:Datagrid/Property/reporter.html.twig
+                template:      OroIssueBundle:Issue:Datagrid/Property/reporter.html.twig
             issueAssigneeName:
                 type:          twig
                 label:         oro.issue.assignee.label
                 frontend_type: html
-                template:      IssueBundle:Issue:Datagrid/Property/assignee.html.twig
+                template:      OroIssueBundle:Issue:Datagrid/Property/assignee.html.twig
             createdAt:
                 label:         oro.issue.created.label
                 frontend_type: datetime

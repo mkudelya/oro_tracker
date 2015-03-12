@@ -1,5 +1,5 @@
 issue:
-    resource: "@IssueBundle/Resources/config/routing.yml"
+    resource: "@OroIssueBundle/Resources/config/routing.yml"
     prefix:   /
 
 #

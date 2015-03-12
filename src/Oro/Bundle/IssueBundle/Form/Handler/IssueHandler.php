@@ -93,7 +93,7 @@ class IssueHandler
             if ($this->form->isValid()) {
 
                 if (!is_null($parentIssueCode)) {
-                    $parent = $this->manager->getRepository('IssueBundle:Issue')->findOneByCode($parentIssueCode);
+                    $parent = $this->manager->getRepository('OroIssueBundle:Issue')->findOneByCode($parentIssueCode);
                     $entity->setParent($parent);
                 }
 

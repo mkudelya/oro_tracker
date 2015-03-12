@@ -28,7 +28,7 @@ class GridHelper
     public function getPriorityChoices()
     {
         $result = [];
-        $objects  = $this->em->getRepository('IssueBundle:IssuePriority')->findAll();
+        $objects  = $this->em->getRepository('OroIssueBundle:IssuePriority')->findAll();
         foreach ($objects as $obj) {
             $result[$obj->getName()] = $obj->getLabel();
         }
@@ -39,7 +39,7 @@ class GridHelper
     public function getResolutionChoices()
     {
         $result = [];
-        $objects  = $this->em->getRepository('IssueBundle:IssueResolution')->findAll();
+        $objects  = $this->em->getRepository('OroIssueBundle:IssueResolution')->findAll();
         foreach ($objects as $obj) {
             $result[$obj->getName()] = $obj->getLabel();
         }

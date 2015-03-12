@@ -1,10 +1,10 @@
 oro_issue_bundle:
-    resource:     "@IssueBundle/Controller"
+    resource:     "@OroIssueBundle/Controller"
     type:         annotation
     prefix:       /issue
 
 oro_issue_bundle_api:
-    resource:     "@IssueBundle/Controller/Api/Rest/IssueController.php"
+    resource:     "@OroIssueBundle/Controller/Api/Rest/IssueController.php"
     type:         rest
     prefix:       /issue/api/rest/{version}
     requirements:

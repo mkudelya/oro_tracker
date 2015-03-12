@@ -19,7 +19,7 @@ class IssueController extends Controller
      * @Acl(
      *      id="oro_issue_view",
      *      type="entity",
-     *      class="IssueBundle:Issue",
+     *      class="OroIssueBundle:Issue",
      *      permission="VIEW"
      * )
      * @return array
@@ -37,10 +37,10 @@ class IssueController extends Controller
      * @Acl(
      *      id="oro_issue_create",
      *      type="entity",
-     *      class="IssueBundle:Issue",
+     *      class="OroIssueBundle:Issue",
      *      permission="CREATE"
      * )
-     * @Template("IssueBundle:Issue:update.html.twig")
+     * @Template("OroIssueBundle:Issue:update.html.twig")
      */
     public function createAction($parentIssueCode = null)
     {
@@ -68,7 +68,7 @@ class IssueController extends Controller
      * @Acl(
      *      id="oro_issue_update",
      *      type="entity",
-     *      class="IssueBundle:Issue",
+     *      class="OroIssueBundle:Issue",
      *      permission="EDIT"
      * )
      */
