@@ -43,6 +43,17 @@ class IssuePriority
     }
 
     /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+
+        return $this;
+    }
+
+    /**
      * Set name
      *
      * @param string $name

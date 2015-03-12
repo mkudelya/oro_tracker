@@ -220,6 +220,17 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = (int) $id;
+
+        return $this;
+    }
+
+    /**
      * Set code
      *
      * @param string $code
@@ -477,17 +488,14 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Set related
+     * Add related
      *
-     * @param ArrayCollection $related
+     * @param Issue $related
      * @return Issue
      */
-    public function setRelated($related)
+    public function addRelated(Issue $related)
     {
-        if ($related instanceof ArrayCollection) {
-            $this->related[] = $related;
-        }
-
+        $this->related[] = $related;
         return $this;
     }
 
@@ -512,12 +520,12 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * Set collaborator
+     * Add collaborator
      *
-     * @param ArrayCollection $collaborator
+     * @param User $collaborator
      * @return Issue
      */
-    public function setCollaborator(ArrayCollection $collaborator)
+    public function addCollaborator(User $collaborator)
     {
         $this->collaborator[] = $collaborator;
 
@@ -539,9 +547,28 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCollaborator()
+    public function getCollaborators()
     {
         return $this->collaborator;
+    }
+
+    /**
+     * @param \Oro\Bundle\UserBundle\Entity\User $user
+     * @return bool
+     */
+    public function hasCollaborator($user)
+    {
+        $collaborators = $this->getCollaborators();
+
+        if ($collaborators->count()) {
+            foreach ($collaborators as $collaborator) {
+                if ($collaborator->getId() == $user->getId()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -570,10 +597,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set children
      *
-     * @param ArrayCollection $children
+     * @param Issue $children
      * @return Issue
      */
-    public function setChild(ArrayCollection $children)
+    public function addChild(Issue $children)
     {
         $this->children[] = $children;
 

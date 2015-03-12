@@ -41,6 +41,8 @@ class IssueController extends Controller
      *      permission="CREATE"
      * )
      * @Template("OroIssueBundle:Issue:update.html.twig")
+     * @param string $parentIssueCode
+     * @return array
      */
     public function createAction($parentIssueCode = null)
     {
