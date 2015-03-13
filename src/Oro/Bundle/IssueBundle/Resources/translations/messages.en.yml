@@ -17,3 +17,5 @@ oro:
         created.label: Created
         updated.label: Updated
         workflow_step.label: Status
+        subissue.label: Sub-issues
+        parent_issue.label: Parent issue

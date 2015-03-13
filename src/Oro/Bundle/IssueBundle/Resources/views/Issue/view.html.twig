@@ -1,6 +1,7 @@
 {% extends 'OroUIBundle:actions:view.html.twig' %}
 {% import 'OroUIBundle::macros.html.twig' as UI %}
 {% import 'OroEntityConfigBundle::macros.html.twig' as entityConfig %}
+{% import 'OroDataGridBundle::macros.html.twig' as dataGrid %}
 
 {% oro_title_set({params : {"%entity.summary%": entity.summary|default('N/A') }}) %}
 
@@ -67,6 +68,14 @@
             {%- endif -%}
             {%- endset -%}
             {{ UI.renderHtmlProperty('oro.issue.owner.label'|trans, ownerData) }}
+
+            {% if entity.parent is not empty %}
+                    {{ UI.button({
+                    'path':  path('oro_issue_view', {'id': entity.parent.id}),
+                    'label': 'oro.issue.parent_issue.label'|trans,
+                    'title': 'oro.issue.parent_issue.label'|trans,
+                    }) }}
+            {% endif %}
         </div>
         <div class="responsive-block">
             {{ entityConfig.renderDynamicFields(entity) }}
@@ -83,6 +92,17 @@
     ]
     }
     ] %}
+
+    {% if entity.type == 'story' %}
+        {% set dataBlocks = dataBlocks|merge([{
+        'title': 'oro.issue.subissue.label'|trans,
+        'subblocks': [{
+        'title': '',
+        'useSpan': false,
+        'data' : [dataGrid.renderGrid('sub-issue-grid', {'parent_id': entity.id})]
+        }]
+        }] ) %}
+    {% endif %}
 
     {% set id = 'issueView' %}
     {% set data = { 'dataBlocks': dataBlocks } %}

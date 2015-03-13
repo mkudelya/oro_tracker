@@ -7,7 +7,6 @@ use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 /**
  * @outputBuffering enabled
  * @dbIsolation
- * dbReindex
  */
 class IssueControllersTest extends WebTestCase
 {
@@ -22,7 +21,7 @@ class IssueControllersTest extends WebTestCase
         $form = $crawler->selectButton('Save and Close')->form();
         $form['oro_issue[code]'] = 'new code';
         $form['oro_issue[summary]'] = 'summary';
-        $form['oro_issue[type]'] = 'task';
+        $form['oro_issue[type]'] = 'story';
 
         $this->client->followRedirects(true);
         $crawler = $this->client->submit($form);
@@ -30,6 +29,32 @@ class IssueControllersTest extends WebTestCase
         $result = $this->client->getResponse();
         $this->assertHtmlResponseStatusCodeEquals($result, 200);
         $this->assertContains("NEWCODE", $crawler->html());
+    }
+
+    /**
+     * @depends testCreate
+     */
+    public function testCreateSubissue()
+    {
+        $crawler = $this->client->request(
+            'GET',
+            $this->getUrl(
+                'oro_subissue_create',
+                array('parentIssueCode' => 'NEWCODE')
+            )
+        );
+
+        $form = $crawler->selectButton('Save and Close')->form();
+        $form['oro_issue[code]'] = 'new code subissue';
+        $form['oro_issue[summary]'] = 'summary';
+        $form['oro_issue[type]'] = 'story';
+
+        $this->client->followRedirects(true);
+        $crawler = $this->client->submit($form);
+
+        $result = $this->client->getResponse();
+        $this->assertHtmlResponseStatusCodeEquals($result, 200);
+        $this->assertContains("NEWCODESUBISSUE", $crawler->html());
     }
 
     /**

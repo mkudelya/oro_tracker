@@ -493,7 +493,7 @@ class Issue extends ExtendIssue implements Taggable
      * @param Issue $related
      * @return Issue
      */
-    public function addRelated(Issue $related)
+    public function setRelated(Issue $related)
     {
         $this->related[] = $related;
         return $this;

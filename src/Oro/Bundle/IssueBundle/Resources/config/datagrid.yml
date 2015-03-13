@@ -22,6 +22,7 @@ datagrid:
                     - workflowStep.label as workflowStepLabel
                 from:
                     - { table: %oro_issue.entity.class%, alias: issue }
+
                 join:
                     left:
                         - { join: issue.priority, alias: issuePriority }
@@ -161,3 +162,40 @@ datagrid:
                 link:          delete_link
         options:
             entity_pagination: true
+
+    parents-issue-grid:
+        extends: issue-grid
+        source:
+            query:
+                where:
+                    and:
+                        - issue.parent IS NULL
+        filters: ~
+
+    sub-issue-grid:
+        extends: issue-grid
+        source:
+            query:
+                where:
+                    and:
+                        - issue.parent = :parent_id
+            bind_parameters:
+                - parent_id
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true
+
+    assignee-issue-grid:
+        extends: issue-grid
+        source:
+            query:
+                where:
+                    and:
+                        - issue.assignee = :assignee_id
+            bind_parameters:
+                - assignee_id
+        filters: ~
+        options:
+            toolbarOptions:
+                hide: true

@@ -38,7 +38,7 @@
     'data': [
     form_row(form.code),
     form_row(form.summary),
-    form_row(form.type),
+    form.type is defined ? form_row(form.type) : '',
     form_row(form.description),
     form_row(form.priority),
     form_row(form.assignee),

@@ -85,6 +85,11 @@ class IssueHandler
             FormUtils::replaceField($this->form, 'owner', ['read_only' => true]);
         }
 
+        //user can't change issue type
+        if ($entity->getId()) {
+            $this->form->remove('type');
+        }
+
         $this->form->setData($entity);
 
         if (in_array($this->request->getMethod(), array('POST', 'PUT'))) {

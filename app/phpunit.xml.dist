@@ -8,9 +8,11 @@
          bootstrap="bootstrap.php.cache"
 >
     <testsuites>
-        <testsuite name="Project Test Suite">
-            <directory>../src/*/*Bundle/Tests</directory>
-            <directory>../src/*/Bundle/*Bundle/Tests</directory>
+        <testsuite name="Functional Suite">
+            <directory>../src/*/Bundle/*Bundle/Tests/Functional</directory>
+        </testsuite>
+        <testsuite name="Unit Suite">
+            <directory>../src/*/Bundle/*Bundle/Tests/Unit</directory>
         </testsuite>
     </testsuites>
 
@@ -24,12 +26,10 @@
         <whitelist>
             <directory>../src</directory>
             <exclude>
-                <directory>../src/*Bundle/Resources</directory>
-                <directory>../src/*Bundle/Tests</directory>
-                <directory>../src/*/*Bundle/Resources</directory>
-                <directory>../src/*/*Bundle/Tests</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
+                <directory>../src/*/Bundle/*Bundle/Migrations</directory>
+                <file>../src/*/Bundle/*Bundle/OroIssueBundle.php</file>
             </exclude>
         </whitelist>
         <blacklist>

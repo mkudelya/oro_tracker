@@ -28,7 +28,7 @@ class IssueControllerTest extends WebTestCase
 
         $this->loadFixtures(
             array(
-                'Oro\Bundle\IssueBundle\Tests\Functional\Controller\Api\Rest\DataFixtures\LoadPriorityData',
+                'Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures\LoadPriorityData',
             )
         );
     }

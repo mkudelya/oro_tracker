@@ -8,6 +8,13 @@ workflows:
                     - start_progress
                     - resolve
                     - close
+            reopen:
+                label: 'Reopen'
+                order: 10
+                allowed_transitions:
+                    - start_progress
+                    - resolve
+                    - close
             in_progress:
                 label: 'In progress'
                 order: 20
