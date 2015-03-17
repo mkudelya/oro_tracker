@@ -1,0 +1,50 @@
+definitions:
+    add_collaborator_for_issue:
+        label: 'add collaborator for issue'
+        enabled: true
+        entity:  Oro\Bundle\IssueBundle\Entity\Issue
+        actions_configuration:
+            - @call_method:
+                object: $.data
+                method: addCollaborator
+                method_parameters: [$reporter]
+            - @call_method:
+                object: $.data
+                method: addCollaborator
+                method_parameters: [$assignee]
+
+    add_collaborator_by_note:
+        label: 'Set issue updatedAt on adding a new note'
+        enabled: true
+        entity:  Oro\Bundle\NoteBundle\Entity\Note
+        actions_configuration:
+            - @call_method:
+                object: $.data
+                attribute: $.isIssue
+                method: supportTarget
+                method_parameters: ['Issue']
+            - @create_datetime:
+                condition:
+                    @true: $.isIssue
+                attribute: $.data.target.updatedAt
+            - @call_method:
+                condition:
+                    @true: $.isIssue
+                object: $.data.target
+                method: addCollaborator
+                method_parameters: [$owner]
+
+triggers:
+    add_collaborator_for_issue:
+        -
+            event:  create
+            queued: false
+        -
+            event:  update
+            field:  assignee
+            queued: false
+
+    add_collaborator_by_note:
+        -
+            event:  create
+            queued: false

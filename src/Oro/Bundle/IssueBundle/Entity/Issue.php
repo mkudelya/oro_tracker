@@ -128,10 +128,10 @@ class Issue extends ExtendIssue implements Taggable
     protected $related;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User", inversedBy="issue")
+     * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinTable(name="oro_issue_issue_collaborators")
      **/
-    protected $collaborator;
+    protected $collaborators;
 
     /**
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
@@ -177,7 +177,7 @@ class Issue extends ExtendIssue implements Taggable
     public function __construct()
     {
         $this->related = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->collaborator = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->collaborators = new \Doctrine\Common\Collections\ArrayCollection();
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -527,7 +527,9 @@ class Issue extends ExtendIssue implements Taggable
      */
     public function addCollaborator(User $collaborator)
     {
-        $this->collaborator[] = $collaborator;
+        if (!$this->hasCollaborator($collaborator)) {
+            $this->collaborators[] = $collaborator;
+        }
 
         return $this;
     }
@@ -539,7 +541,7 @@ class Issue extends ExtendIssue implements Taggable
      */
     public function removeCollaborator(User $collaborator)
     {
-        $this->collaborator->removeElement($collaborator);
+        $this->collaborators->removeElement($collaborator);
     }
 
     /**
@@ -549,7 +551,7 @@ class Issue extends ExtendIssue implements Taggable
      */
     public function getCollaborators()
     {
-        return $this->collaborator;
+        return $this->collaborators;
     }
 
     /**

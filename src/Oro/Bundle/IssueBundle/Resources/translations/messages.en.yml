@@ -19,3 +19,5 @@ oro:
         workflow_step.label: Status
         subissue.label: Sub-issues
         parent_issue.label: Parent issue
+        collaborator_name.label: Collaborator name
+        collaborators.label: Collaborators

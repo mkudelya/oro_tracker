@@ -199,3 +199,27 @@ datagrid:
         options:
             toolbarOptions:
                 hide: true
+
+    collaborators-grid:
+        source:
+            type: orm
+            acl_resource: oro_issue_view
+            query:
+                select:
+                    - collaborators.id
+                    - CONCAT(collaborators.firstName, CONCAT(' ', collaborators.lastName)) as name
+                from:
+                    - { table: %oro_issue.entity.class%, alias: issue }
+                join:
+                    left:
+                         - { join: issue.collaborators, alias: collaborators }
+                where:
+                    and:
+                        - issue.id = :issue_id
+            bind_parameters:
+                - issue_id
+        columns:
+            name:
+                label:         oro.issue.collaborator_name.label
+            step:
+                renderable: false

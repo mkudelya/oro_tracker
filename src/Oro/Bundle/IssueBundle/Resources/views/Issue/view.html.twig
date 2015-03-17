@@ -104,6 +104,15 @@
         }] ) %}
     {% endif %}
 
+    {% set dataBlocks = dataBlocks|merge([{
+    'title': 'oro.issue.collaborators.label'|trans,
+    'subblocks': [{
+    'title': '',
+    'useSpan': false,
+    'data' : [dataGrid.renderGrid('collaborators-grid', {'issue_id': entity.id})]
+    }]
+    }] ) %}
+
     {% set id = 'issueView' %}
     {% set data = { 'dataBlocks': dataBlocks } %}
 
