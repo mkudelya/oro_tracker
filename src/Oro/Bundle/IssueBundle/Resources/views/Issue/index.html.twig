@@ -10,4 +10,11 @@
         'entity_label': 'oro.issue.entity.label'|trans
         }) }}
     {% endif %}
+
+    {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
+    entity_class:            entity_class,
+    importProcessor:         'oro_issue',
+    dataGridName:             gridName
+    } %}
+
 {% endblock %}

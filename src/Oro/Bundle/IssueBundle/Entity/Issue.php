@@ -11,6 +11,7 @@ use Oro\Bundle\OrganizationBundle\Entity\Organization;
 use Oro\Bundle\UserBundle\Entity\User;
 use Oro\Bundle\IssueBundle\Model\ExtendIssue;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 use Oro\Bundle\TagBundle\Entity\Tag;
@@ -53,38 +54,94 @@ class Issue extends ExtendIssue implements Taggable
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Id",
+     *            "order"="10"
+     *        }
+     *    }
+     * )
      */
     protected $id;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Code",
+     *            "order"="20"
+     *        }
+     *    }
+     * )
      */
     protected $code;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Summary",
+     *            "order"="30"
+     *        }
+     *    }
+     * )
      */
     protected $summary;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Description",
+     *            "order"="40"
+     *        }
+     *    }
+     * )
      */
     protected $description;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Type",
+     *            "order"="50"
+     *        }
+     *    }
+     * )
      */
     protected $type;
 
     /**
      * @ORM\ManyToOne(targetEntity="IssuePriority")
      * @ORM\JoinColumn(name="priority_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Priority",
+     *            "order"="60"
+     *        }
+     *    }
+     * )
      **/
     protected $priority;
 
     /**
      * @ORM\ManyToOne(targetEntity="IssueResolution")
      * @ORM\JoinColumn(name="resolution_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Resolution",
+     *            "order"="70"
+     *        }
+     *    }
+     * )
      **/
     protected $resolution;
 
@@ -93,6 +150,13 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @ORM\OneToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowItem")
      * @ORM\JoinColumn(name="workflow_item_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $workflowItem;
 
@@ -101,73 +165,171 @@ class Issue extends ExtendIssue implements Taggable
      *
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\WorkflowBundle\Entity\WorkflowStep")
      * @ORM\JoinColumn(name="workflow_step_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $workflowStep;
 
     /**
      * @var Tag[]
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $tags;
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="reporter_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Reporter",
+     *            "order"="80",
+     *            "short"=true
+     *        }
+     *    }
+     * )
      **/
     protected $reporter;
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assignee_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Assignee",
+     *            "order"="90",
+     *            "short"=true
+     *        }
+     *    }
+     * )
      **/
     protected $assignee;
 
     /**
      * @ORM\ManyToMany(targetEntity="Issue", inversedBy="related")
      * @ORM\JoinTable(name="oro_issue_issue_relation")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Related",
+     *            "order"="100"
+     *        }
+     *    }
+     * )
      **/
     protected $related;
 
     /**
      * @ORM\ManyToMany(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinTable(name="oro_issue_issue_collaborators")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      **/
     protected $collaborators;
 
     /**
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      **/
     protected $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="Issue", mappedBy="parent")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $children;
 
     /**
      * @var \stdClass
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $notes;
 
     /**
      * @ORM\Column(type="datetime")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "excluded"=true
+     *        }
+     *    }
+     * )
      */
     protected $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="owner_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Owner",
+     *            "order"="150"
+     *        }
+     *    }
+     * )
      */
     protected $owner;
 
     /**
      * @ORM\ManyToOne(targetEntity="Oro\Bundle\OrganizationBundle\Entity\Organization")
      * @ORM\JoinColumn(name="organization_id", referencedColumnName="id")
+     * @ConfigField(
+     *    defaultValues={
+     *        "importexport"={
+     *            "header"="Organization",
+     *            "order"="160"
+     *        }
+     *    }
+     * )
      */
     protected $organization;
 
