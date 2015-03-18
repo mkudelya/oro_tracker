@@ -4,11 +4,19 @@ namespace Oro\Bundle\IssueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="oro_issue_resolution")
+ * @Config(
+ *      defaultValues={
+ *          "entity"={
+ *              "icon"="icon-github"
+ *          }
+ *      }
+ * )
  */
 class IssueResolution
 {
@@ -24,6 +32,7 @@ class IssueResolution
      * @ConfigField(
      *      defaultValues={
      *          "importexport"={
+     *              "header"="Name",
      *              "identity"=true
      *          }
      *      }

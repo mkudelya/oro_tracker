@@ -4,11 +4,19 @@ namespace Oro\Bundle\IssueBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\ConfigField;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="oro_issue_priority")
+ * @Config(
+ *      defaultValues={
+ *          "entity"={
+ *              "icon"="icon-github"
+ *          }
+ *      }
+ * )
  */
 class IssuePriority
 {
@@ -24,6 +32,7 @@ class IssuePriority
      * @ConfigField(
      *      defaultValues={
      *          "importexport"={
+     *              "header"="Name",
      *              "identity"=true
      *          }
      *      }
@@ -66,7 +75,7 @@ class IssuePriority
      * Set name
      *
      * @param string $name
-     * @return Priority
+     * @return $this
      */
     public function setName($name)
     {

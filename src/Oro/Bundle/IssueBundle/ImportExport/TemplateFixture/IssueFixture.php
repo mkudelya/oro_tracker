@@ -32,7 +32,7 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
      */
     public function getData()
     {
-        return $this->getEntityData('Issue');
+        return $this->getEntityData('Example 1');
     }
 
     /**
@@ -43,17 +43,22 @@ class IssueFixture extends AbstractTemplateRepository implements TemplateFixture
     {
         $user = $this->templateManager
             ->getEntityRepository('Oro\Bundle\UserBundle\Entity\User')
-            ->getEntity('John Dow');
+            ->getEntity('John Doo');
         $organization = $this->templateManager
             ->getEntityRepository('Oro\Bundle\OrganizationBundle\Entity\Organization')
             ->getEntity('default');
+
         $priority = new IssuePriority();
-        $priority->setName('Major');
+        $priority->setName('major');
+        $priority->setLabel('Major');
+        $priority->setOrder(1);
+
         $resolution = new IssueResolution();
-        $resolution->setName('Fixed');
+        $resolution->setName('fixed');
+        $resolution->setLabel('Fixed');
 
         switch ($key) {
-            case 'Issue':
+            case 'Example 1':
                 $entity->setCode('new code')
                     ->setSummary('Summary example')
                     ->setDescription('Description example')
