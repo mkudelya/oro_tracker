@@ -30,7 +30,7 @@ class IssueType extends AbstractType
                 'text',
                 [
                     'required' => true,
-                    'label' => 'oro.issue.code.label'
+                    'label' => 'oro.issue.code_label'
                 ]
             )
             ->add(
@@ -38,7 +38,7 @@ class IssueType extends AbstractType
                 'text',
                 [
                     'required' => true,
-                    'label' => 'oro.issue.summary.label'
+                    'label' => 'oro.issue.summary_label'
                 ]
             )
             ->add(
@@ -46,7 +46,7 @@ class IssueType extends AbstractType
                 'choice',
                 array(
                     'choices' => $this->types,
-                    'label' => 'oro.issue.type.label',
+                    'label' => 'oro.issue.type_label',
                     'required' => true
                 )
             )
@@ -55,14 +55,14 @@ class IssueType extends AbstractType
                 'textarea',
                 [
                     'required' => false,
-                    'label' => 'oro.issue.description.label'
+                    'label' => 'oro.issue.description_label'
                 ]
             )
             ->add(
                 'priority',
                 'translatable_entity',
                 [
-                    'label' => 'oro.issue.priority.label',
+                    'label' => 'oro.issue.priority_label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssuePriority',
                     'required' => true
                 ]
@@ -71,7 +71,7 @@ class IssueType extends AbstractType
                 'assignee',
                 'translatable_entity',
                 [
-                    'label' => 'oro.issue.assignee.label',
+                    'label' => 'oro.issue.assignee_label',
                     'class' => 'Oro\Bundle\UserBundle\Entity\User',
                     'required' => true
                 ]
@@ -80,7 +80,7 @@ class IssueType extends AbstractType
                 'related',
                 'translatable_entity',
                 [
-                    'label' => 'oro.issue.related.label',
+                    'label' => 'oro.issue.related_label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\Issue',
                     'multiple' => true,
                     'required' => false

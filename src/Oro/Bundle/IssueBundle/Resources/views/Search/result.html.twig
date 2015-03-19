@@ -1,0 +1,18 @@
+{% extends 'OroSearchBundle:Search:searchResultItem.html.twig' %}
+
+{% set recordUrl = indexer_item.recordUrl %}
+{% set title = entity ? entity.code ~ " " ~ entity.summary : indexer_item.title %}
+
+{% set entityType = 'oro.issue.entity_label'|trans %}
+{% set showImage = false %}
+{% set image = null %}
+
+{% set entityInfo = [
+{'title': 'oro.issue.code_label'|trans, 'value': entity.code},
+{'title': 'oro.issue.summary_label'|trans, 'value': entity.summary},
+{'title': 'oro.issue.priority_label'|trans, 'value': entity.priority.label},
+{'title': 'oro.issue.workflow_step_label'|trans, 'value': entity.workflowStep ? entity.workflowStep.label : ''},
+{'title': 'oro.issue.reporter_label'|trans, 'value': entity.reporter},
+{'title': 'oro.issue.assignee_label'|trans, 'value': entity.assignee},
+]
+%}

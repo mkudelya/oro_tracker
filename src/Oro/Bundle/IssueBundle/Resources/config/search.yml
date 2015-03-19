@@ -1,0 +1,99 @@
+Oro\Bundle\IssueBundle\Entity\Issue:
+    alias: oro_issue
+    search_template: OroIssueBundle:Search:result.html.twig
+    label: oro.issue.entity_label
+    route:
+        name: oro_issue_view
+        parameters:
+            id: id
+    mode: normal
+    title_fields: [summary]
+    fields:
+        -
+            name: summary
+            target_type: text
+            target_fields: [summary]
+        -
+            name: code
+            target_type: text
+            target_fields: [code]
+        -
+            name: type
+            target_type: text
+            target_fields: [type]
+        -
+            name: priority
+            relation_type: many-to-one
+            relation_fields:
+                -
+                    name: label
+                    target_type: text
+                    target_fields: [label, all_data]
+                -
+                    name: id
+                    target_type: integer
+                    target_fields: [type]
+        -
+            name: workflowStep
+            relation_type: many-to-one
+            relation_fields:
+                -
+                    name: label
+                    target_type: text
+                    target_fields: [label, all_data]
+                -
+                    name: id
+                    target_type: integer
+                    target_fields: [workflowStep]
+        -
+            name: resolution
+            relation_type: many-to-one
+            relation_fields:
+                -
+                    name: label
+                    target_type: text
+                    target_fields: [label, all_data]
+                -
+                    name: id
+                    target_type: integer
+                    target_fields: [type]
+        -
+            name: reporter
+            relation_type: many-to-one
+            relation_fields:
+                -
+                    name: username
+                    target_type: text
+                    target_fields: [username, all_data]
+                -
+                    name: firstName
+                    target_type: text
+                    target_fields: [firstName, all_data]
+                -
+                    name: lastName
+                    target_type: text
+                    target_fields: [lastName, all_data]
+                -
+                    name: id
+                    target_type: integer
+                    target_fields: [reporter]
+        -
+            name: assignee
+            relation_type: many-to-one
+            relation_fields:
+                -
+                    name: username
+                    target_type: text
+                    target_fields: [username, all_data]
+                -
+                    name: firstName
+                    target_type: text
+                    target_fields: [firstName, all_data]
+                -
+                    name: lastName
+                    target_type: text
+                    target_fields: [lastName, all_data]
+                -
+                    name: id
+                    target_type: integer
+                    target_fields: [assignee]

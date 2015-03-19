@@ -9,13 +9,13 @@
     {% if entity.type == 'story' and resource_granted('oro_issue_create') %}
         {{ UI.addButton({
         'path' : path('oro_subissue_create', {'parentIssueCode' : entity.code}),
-        'entity_label': 'oro.issue.subentity.label'|trans
+        'entity_label': 'oro.issue.subentity_label'|trans
         }) }}
     {% endif %}
     {% if resource_granted('EDIT', entity) %}
         {{ UI.editButton({
         'path' : path('oro_issue_update', { id: entity.id }),
-        'entity_label': 'oro.issue.entity.label'|trans
+        'entity_label': 'oro.issue.entity_label'|trans
         }) }}
     {% endif %}
     {% if resource_granted('DELETE', entity) %}
@@ -25,7 +25,7 @@
         'aCss': 'no-hash remove-button',
         'id': 'btn-remove-user',
         'dataId': entity.id,
-        'entity_label': 'oro.issue.entity.label'|trans
+        'entity_label': 'oro.issue.entity_label'|trans
         }) }}
     {% endif %}
 {% endblock navButtons %}
@@ -34,7 +34,7 @@
     {% set breadcrumbs = {
     'entity': entity,
     'indexPath': path('oro_issue_index'),
-    'indexLabel': 'oro.issue.entity_plural.label'|trans,
+    'indexLabel': 'oro.issue.entity_plural_label'|trans,
     'entityTitle': entity.summary
     } %}
     {{ parent() }}
@@ -44,17 +44,17 @@
     {%- set issueInformation -%}
     <div class="row-fluid form-horizontal">
         <div class="responsive-block">
-            {{ UI.renderProperty('oro.issue.summary.label'|trans, entity.summary) }}
-            {{ UI.renderProperty('oro.issue.code.label'|trans, entity.code) }}
-            {{ UI.renderHtmlProperty('oro.issue.description.label'|trans, entity.description|nl2br) }}
-            {{ UI.renderProperty('oro.issue.organization.label'|trans, entity.organization) }}
-            {{ UI.renderProperty('oro.issue.type.label'|trans, entity.type) }}
-            {{ UI.renderProperty('oro.issue.resolution.label'|trans, entity.resolution) }}
-            {{ UI.renderProperty('oro.issue.assignee.label'|trans, entity.assignee) }}
-            {{ UI.renderProperty('oro.issue.reporter.label'|trans, entity.reporter) }}
-            {{ UI.renderProperty('oro.issue.created.label'|trans, entity.createdAt|oro_format_datetime) }}
-            {{ UI.renderProperty('oro.issue.updated.label'|trans, entity.updatedAt|oro_format_datetime) }}
-            {{ UI.renderProperty('oro.issue.priority.label'|trans, entity.priority) }}
+            {{ UI.renderProperty('oro.issue.summary_label'|trans, entity.summary) }}
+            {{ UI.renderProperty('oro.issue.code_label'|trans, entity.code) }}
+            {{ UI.renderHtmlProperty('oro.issue.description_label'|trans, entity.description|nl2br) }}
+            {{ UI.renderProperty('oro.issue.organization_label'|trans, entity.organization) }}
+            {{ UI.renderProperty('oro.issue.type_label'|trans, entity.type) }}
+            {{ UI.renderProperty('oro.issue.resolution_label'|trans, entity.resolution) }}
+            {{ UI.renderProperty('oro.issue.assignee_label'|trans, entity.assignee) }}
+            {{ UI.renderProperty('oro.issue.reporter_label'|trans, entity.reporter) }}
+            {{ UI.renderProperty('oro.issue.created_label'|trans, entity.createdAt|oro_format_datetime) }}
+            {{ UI.renderProperty('oro.issue.updated_label'|trans, entity.updatedAt|oro_format_datetime) }}
+            {{ UI.renderProperty('oro.issue.priority_label'|trans, entity.priority) }}
 
             {%- set ownerData -%}
             {%- if entity.owner -%}
@@ -67,13 +67,13 @@
                 {% endif %}
             {%- endif -%}
             {%- endset -%}
-            {{ UI.renderHtmlProperty('oro.issue.owner.label'|trans, ownerData) }}
+            {{ UI.renderHtmlProperty('oro.issue.owner_label'|trans, ownerData) }}
 
             {% if entity.parent is not empty %}
                     {{ UI.button({
                     'path':  path('oro_issue_view', {'id': entity.parent.id}),
-                    'label': 'oro.issue.parent_issue.label'|trans,
-                    'title': 'oro.issue.parent_issue.label'|trans,
+                    'label': 'oro.issue.parent_issue_label'|trans,
+                    'title': 'oro.issue.parent_issue_label'|trans,
                     }) }}
             {% endif %}
         </div>
@@ -95,7 +95,7 @@
 
     {% if entity.type == 'story' %}
         {% set dataBlocks = dataBlocks|merge([{
-        'title': 'oro.issue.subissue.label'|trans,
+        'title': 'oro.issue.subissue_label'|trans,
         'subblocks': [{
         'title': '',
         'useSpan': false,
@@ -105,7 +105,7 @@
     {% endif %}
 
     {% set dataBlocks = dataBlocks|merge([{
-    'title': 'oro.issue.collaborators.label'|trans,
+    'title': 'oro.issue.collaborators_label'|trans,
     'subblocks': [{
     'title': '',
     'useSpan': false,
