@@ -47,7 +47,6 @@ class IssueController extends Controller
     public function createAction($parentIssueCode = null)
     {
         $issue = new Issue();
-        $issue->setReporter($this->getUser());
 
         if ($parentIssueCode) {
             $formAction = $this->get('oro_entity.routing_helper')
@@ -119,5 +118,47 @@ class IssueController extends Controller
     public function viewAction(Issue $issue)
     {
         return array('entity' => $issue);
+    }
+
+    /**
+     * @Route("/statusbarchart/{widget}", name="oro_issue_statusbarchart", requirements={"widget"="[\w-]+"})
+     * @Template("OroIssueBundle:Dashboard:status_bar_chart.html.twig")
+     *
+     * @param $widget
+     * @return array $widgetAttr
+     */
+    public function statusbarchartAction($widget)
+    {
+        $data = $this->getDoctrine()->getRepository('OroIssueBundle:Issue')->loadGroupByStatus();
+
+        $widgetAttr = $this->get('oro_dashboard.widget_configs')->getWidgetAttributesForTwig($widget);
+        $widgetAttr['chartView'] = $this->get('oro_chart.view_builder')
+            ->setArrayData($data)
+            ->setOptions(
+                array(
+                    'name' => 'bar_chart',
+                    'data_schema' => array(
+                        'label' => array('field_name' => 'name'),
+                        'value' => array('field_name' => 'ct')
+                    )
+                )
+            )->getView();
+
+        return $widgetAttr;
+    }
+
+    /**
+     * @Route("/issueshortgrid/{widget}", name="oro_issue_issueshortgrid", requirements={"widget"="[\w-]+"})
+     * @Template("OroIssueBundle:Dashboard:issue_short_grid.html.twig")
+     *
+     * @param $widget
+     * @return array $widgetAttr
+     */
+    public function issueshortgridAction($widget)
+    {
+        $widgetAttr = $this->get('oro_dashboard.widget_configs')->getWidgetAttributesForTwig($widget);
+        $widgetAttr['user'] = $this->getUser();
+
+        return $widgetAttr;
     }
 }

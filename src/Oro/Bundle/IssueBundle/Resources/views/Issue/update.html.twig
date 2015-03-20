@@ -1,4 +1,5 @@
 {% extends 'OroUIBundle:actions:update.html.twig' %}
+{% form_theme form with ['OroFormBundle:Form:fields.html.twig', 'OroTagBundle:Form:fields.html.twig'] %}
 
 {% oro_title_set({params : {"%entity.summary%": entity.summary, "%entityName%": 'oro.issue.entity_label'|trans }}) %}
 {% set entityId = entity.id %}
@@ -42,8 +43,10 @@
     form_row(form.description),
     form_row(form.priority),
     form_row(form.assignee),
+    form_row(form.reporter),
     form_row(form.related),
-    form.owner is defined ? form_row(form.owner) : ''
+    form.owner is defined ? form_row(form.owner) : '',
+    form_row(form.tags)
     ]
     }
     ]

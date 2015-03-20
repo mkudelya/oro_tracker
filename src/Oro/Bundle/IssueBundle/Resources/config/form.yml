@@ -41,6 +41,8 @@ services:
             - @doctrine.orm.entity_manager
             - @oro_activity.manager
             - @oro_entity.routing_helper
+        tags:
+            - { name: oro_tag.tag_manager }
 
     oro_issue.form.handler.issue.api:
         class: %oro_issue.form.handler.issue_api.class%
@@ -51,6 +53,8 @@ services:
             - @doctrine.orm.entity_manager
             - @oro_activity.manager
             - @oro_entity.routing_helper
+        tags:
+            - { name: oro_tag.tag_manager }
 
     oro_issue.manager.api:
         class: %oro_issue.manager.api.class%

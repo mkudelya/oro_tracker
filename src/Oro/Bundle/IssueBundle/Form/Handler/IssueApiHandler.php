@@ -8,8 +8,11 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use Oro\Bundle\IssueBundle\Entity\Issue;
+use Oro\Bundle\IssueBundle\Form\Handler\IssueHandler;
+use Oro\Bundle\TagBundle\Entity\TagManager;
+use Oro\Bundle\TagBundle\Form\Handler\TagHandlerInterface;
 
-class IssueApiHandler
+class IssueApiHandler implements TagHandlerInterface
 {
     /**
      * @var FormInterface
@@ -25,6 +28,12 @@ class IssueApiHandler
      * @var ObjectManager
      */
     protected $manager;
+
+    /**
+     * @var TagManager
+     */
+    protected $tagManager;
+
     /**
      *
      * @param FormInterface $form
@@ -70,5 +79,14 @@ class IssueApiHandler
     {
         $this->manager->persist($entity);
         $this->manager->flush();
+        $this->tagManager->saveTagging($entity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTagManager(TagManager $tagManager)
+    {
+        $this->tagManager = $tagManager;
     }
 }

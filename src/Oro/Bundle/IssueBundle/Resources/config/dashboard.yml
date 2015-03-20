@@ -1,0 +1,10 @@
+oro_dashboard_config:
+    widgets:
+        issue_status_bar_chart:
+            label: oro.widget.status_bar_chart_label
+            acl:   oro_issue_view
+            route: oro_issue_statusbarchart
+        issue_short_grid:
+            label: oro.widget.issue_short_grid
+            acl:   oro_issue_view
+            route: oro_issue_issueshortgrid

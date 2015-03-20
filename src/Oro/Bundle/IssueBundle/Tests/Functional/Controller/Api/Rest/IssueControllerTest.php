@@ -18,6 +18,7 @@ class IssueControllerTest extends WebTestCase
             'type' => 'task',
             'owner' => '1',
             'assignee' => '1',
+            'reporter' => '1',
             'priority' => '1'
         )
     );

@@ -33,9 +33,11 @@ class IssueData extends AbstractFixture implements ContainerAwareInterface
         $obj->setType('task');
         $obj->setPriority($priorityEntity);
         $obj->setAssignee($userEntity);
+        $obj->setReporter($userEntity);
         $obj->setOwner($userEntity);
 
         $manager->persist($obj);
         $manager->flush();
+        $this->setReference('issue', $obj);
     }
 }

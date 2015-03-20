@@ -64,18 +64,18 @@ class WorkflowTest extends WebTestCase
         $this->assertEquals('closed', $workflowItem->getCurrentStep()->getName());
 
         $this->workflowManager->transit($workflowItem, 'reopen');
-        $this->assertEquals('open', $workflowItem->getCurrentStep()->getName());
+        $this->assertEquals('reopen', $workflowItem->getCurrentStep()->getName());
 
         $this->workflowManager->transit($workflowItem, 'close');
         $this->assertEquals('closed', $workflowItem->getCurrentStep()->getName());
 
         $this->workflowManager->transit($workflowItem, 'reopen');
-        $this->assertEquals('open', $workflowItem->getCurrentStep()->getName());
+        $this->assertEquals('reopen', $workflowItem->getCurrentStep()->getName());
 
         $this->workflowManager->transit($workflowItem, 'resolve');
         $this->assertEquals('resolved', $workflowItem->getCurrentStep()->getName());
 
         $this->workflowManager->transit($workflowItem, 'reopen');
-        $this->assertEquals('open', $workflowItem->getCurrentStep()->getName());
+        $this->assertEquals('reopen', $workflowItem->getCurrentStep()->getName());
     }
 }

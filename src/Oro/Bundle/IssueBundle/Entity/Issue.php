@@ -18,7 +18,7 @@ use Oro\Bundle\TagBundle\Entity\Tag;
 use Oro\Bundle\TagBundle\Entity\Taggable;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
  * @ORM\HasLifecycleCallbacks
  * @UniqueEntity("code")
  * @ORM\Table(name="oro_issue_issue")

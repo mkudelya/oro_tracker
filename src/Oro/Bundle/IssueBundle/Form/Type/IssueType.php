@@ -77,6 +77,15 @@ class IssueType extends AbstractType
                 ]
             )
             ->add(
+                'reporter',
+                'translatable_entity',
+                [
+                    'label' => 'oro.issue.reporter_label',
+                    'class' => 'Oro\Bundle\UserBundle\Entity\User',
+                    'required' => true
+                ]
+            )
+            ->add(
                 'related',
                 'translatable_entity',
                 [
@@ -85,6 +94,12 @@ class IssueType extends AbstractType
                     'multiple' => true,
                     'required' => false
                 ]
+            )->add(
+                'tags',
+                'oro_tag_select',
+                array(
+                'label' => 'oro.tag.entity_plural_label'
+                )
             );
     }
 

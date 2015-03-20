@@ -26,7 +26,7 @@ class NoteTest extends WebTestCase
     {
         $crawler = $this->client->request(
             'GET',
-            $this->getUrl('oro_issue_view', array('id' => 1))
+            $this->getUrl('oro_issue_view', array('id' => $this->getReference('issue')->getId()))
         );
 
         $result = $this->client->getResponse();

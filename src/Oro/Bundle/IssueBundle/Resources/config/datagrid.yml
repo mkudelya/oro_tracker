@@ -223,3 +223,37 @@ datagrid:
                 label:         oro.issue.collaborator_name_label
             step:
                 renderable: false
+
+    widget-short-issue-grid:
+        source:
+            type: orm
+            acl_resource: oro_issue_view
+            query:
+                select:
+                    - issue.id
+                    - issue.code
+                    - issue.summary
+                from:
+                    - { table: %oro_issue.entity.class%, alias: issue }
+                join:
+                    inner:
+                         - { join: issue.collaborators, alias: collaborators }
+                         - { join: issue.workflowStep, alias: workflowStep }
+                where:
+                    and:
+                        - collaborators.id = :user_id
+                        - workflowStep.name NOT IN ('resolved', 'closed')
+            bind_parameters:
+                - user_id
+        columns:
+            code:
+                label:         oro.issue.code_label
+            summary:
+                label:         oro.issue.summary_label
+        options:
+            entity_pagination: true
+            toolbarOptions:
+                hide: true
+                pageSize:
+                    items: [10]
+                    default_per_page: 10
