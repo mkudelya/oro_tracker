@@ -1,7 +1,7 @@
 oro_menu_config:
     items:
         issue_list:
-            label: 'oro.issue.entity_plural_label'
+            label: 'oro.issue.entity_plural.label'
             route: 'oro_issue_index'
     tree:
         application_menu:

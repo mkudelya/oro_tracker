@@ -1,27 +1,37 @@
 oro:
     issue:
+        id.label: ID
+        entity.label: Issue
         entity_label: Issue
-        subentity_label: Sub-Issue
+        subentity.label: Sub-Issue
         entity_plural_label: Issues
-        code_label: Code
-        type_label: Type
-        description_label: Description
-        related_label: Related
-        summary_label: Summary
-        priority_label: Priority
-        resolution_label: Resolution
-        organization_label: Organization
-        reporter_label: Reporter
-        assignee_label: Assignee
+        entity_plural.label: Issues
+        code.label: Code
+        type.label: Type
+        description.label: Description
+        related.label: Related
+        summary.label: Summary
+        priority.label: Priority
+        issuepriority.entity_label: Priority
+        resolution.label: Resolution
+        issueresolution.entity_label: Resolution
+        organization.label: Organization
+        reporter.label: Reporter
+        assignee.label: Assignee
         owner.label: Owner
-        created_label: Created
-        updated_label: Updated
-        workflow_step_label: Status
-        subissue_label: Sub-issues
-        parent_issue_label: Parent issue
-        collaborator_name_label: Collaborator name
-        collaborators_label: Collaborators
-        create_label: Create Issue
+        created.label: Created
+        created_at.label: Created
+        updated.label: Updated
+        updated_at.label: Updated
+        workflow_step.label: Status
+        subissue.label: Sub-issues
+        parent_issue.label: Parent issue
+        collaborator_name.label: Collaborator name
+        collaborators.label: Collaborators
+        create.label: Create Issue
+        children.label: Children
+        parent.label: Parent
+        workflow_item.label: Workflow Item
     widget:
         status_bar_chart_label: Bar chart by issue status
         issue_short_grid: User's issues

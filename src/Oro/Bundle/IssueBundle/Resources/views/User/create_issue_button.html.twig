@@ -2,7 +2,7 @@
 {{ UI.clientButton({
     'dataUrl': path('oro_issue_create', {'owner': entity.id}),
     'aCss': 'no-hash',
-    'label': 'oro.issue.create_label'|trans,
+    'label': 'oro.issue.create.label'|trans,
     'widget': {
         'type': 'dialog',
         'multiple': false,
@@ -11,7 +11,7 @@
         'options': {
             'alias': 'issue-dialog',
             'dialogOptions': {
-            'title': 'oro.issue.create_label'|trans,
+            'title': 'oro.issue.create.label'|trans,
             'allowMaximize': true,
             'allowMinimize': true,
             'dblclick': 'maximize',
