@@ -3,4 +3,6 @@
 
 {% block content %}
     {{ dataGrid.renderGrid('widget-short-issue-grid', {'user_id': user.id}) }}
+
+    <div style="margin-left: 20px"><a href="{{ path('oro_issue_index') }}">{{ 'Full list'|trans }}</a></div>
 {% endblock %}

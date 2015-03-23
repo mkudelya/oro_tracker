@@ -2,8 +2,15 @@ placeholders:
     view_content_data_additional_information:
         items:
             oro_issue_list: ~
+    view_navButtons_before:
+        items:
+            oro_issue_create_issue_on_user_page: ~
 
 items:
     oro_issue_list:
         template: OroIssueBundle:User:assignee_issues_list.html.twig
         applicable: @oro_ui.placeholder.filter->isInstanceOf($entity$, %oro_user.entity.class%)
+    oro_issue_create_issue_on_user_page:
+        template: OroIssueBundle:User:create_issue_button.html.twig
+        applicable: @oro_ui.placeholder.filter->isInstanceOf($entity$, %oro_user.entity.class%)
+        acl: oro_issue_view

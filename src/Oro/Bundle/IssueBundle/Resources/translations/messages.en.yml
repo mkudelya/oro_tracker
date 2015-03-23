@@ -21,6 +21,10 @@ oro:
         parent_issue_label: Parent issue
         collaborator_name_label: Collaborator name
         collaborators_label: Collaborators
+        create_label: Create Issue
     widget:
         status_bar_chart_label: Bar chart by issue status
         issue_short_grid: User's issues
+Full list: Full list
+Cancel: Cancel
+Save: Save

@@ -98,7 +98,7 @@ class IssueType extends AbstractType
                 'tags',
                 'oro_tag_select',
                 array(
-                'label' => 'oro.tag.entity_plural_label'
+                    'label' => 'oro.tag.entity_plural_label'
                 )
             );
     }

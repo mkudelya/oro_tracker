@@ -72,9 +72,10 @@ class IssueHandler implements TagHandlerInterface
      *
      * @param Issue $entity
      * @param string $parentIssueCode
+     * @param \Oro\Bundle\UserBundle\Entity\User $currentUser
      * @return bool  True on successful processing, false otherwise
      */
-    public function process(Issue $entity, $parentIssueCode)
+    public function process(Issue $entity, $parentIssueCode, $currentUser)
     {
         $action            = $this->entityRoutingHelper->getAction($this->request);
         $targetEntityClass = $this->entityRoutingHelper->getEntityClassName($this->request);
@@ -95,7 +96,10 @@ class IssueHandler implements TagHandlerInterface
         //user can't change issue type
         if ($entity->getId()) {
             $this->form->remove('type');
+        } else {
+            $entity->setAssignee($currentUser);
         }
+
 
         $this->form->setData($entity);
 

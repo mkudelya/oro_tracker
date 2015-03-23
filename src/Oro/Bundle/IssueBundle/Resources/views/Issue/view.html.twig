@@ -68,7 +68,7 @@
                 {% endif %}
             {%- endif -%}
             {%- endset -%}
-            {{ UI.renderHtmlProperty('oro.issue.owner_label'|trans, ownerData) }}
+            {{ UI.renderHtmlProperty('oro.issue.owner.label'|trans, ownerData) }}
 
             {% if entity.parent is not empty %}
                     {{ UI.button({

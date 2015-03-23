@@ -88,21 +88,26 @@ class IssueController extends Controller
      */
     public function update(Issue $issue, $formAction, $parentIssueCode = null)
     {
-        if ($this->get('oro_issue.form.handler.issue')->process($issue, $parentIssueCode)) {
-            return $this->get('oro_ui.router')->redirectAfterSave(
-                array(
-                    'route' => 'oro_issue_update',
-                    'parameters' => array('id' => $issue->getId()),
-                ),
-                array(
-                    'route' => 'oro_issue_view',
-                    'parameters' => array('id' => $issue->getId()),
-                )
-            );
+        $saved = false;
+        if ($this->get('oro_issue.form.handler.issue')->process($issue, $parentIssueCode, $this->getUser())) {
+            if (!$this->getRequest()->get('_widgetContainer')) {
+                return $this->get('oro_ui.router')->redirectAfterSave(
+                    array(
+                        'route' => 'oro_issue_update',
+                        'parameters' => array('id' => $issue->getId()),
+                    ),
+                    array(
+                        'route' => 'oro_issue_view',
+                        'parameters' => array('id' => $issue->getId()),
+                    )
+                );
+            }
+            $saved = true;
         }
 
         return array(
             'entity'     => $issue,
+            'saved'      => $saved,
             'form'       => $this->get('oro_issue.form.handler.issue')->getForm()->createView(),
             'formAction' => $formAction,
         );
