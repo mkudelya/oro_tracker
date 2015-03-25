@@ -4,7 +4,6 @@ namespace Oro\Bundle\IssueBundle\ImportExport\TemplateFixture;
 
 use Oro\Bundle\ImportExportBundle\TemplateFixture\AbstractTemplateRepository;
 use Oro\Bundle\ImportExportBundle\TemplateFixture\TemplateFixtureInterface;
-
 use Oro\Bundle\IssueBundle\Entity\Issue;
 use Oro\Bundle\IssueBundle\Entity\IssuePriority;
 use Oro\Bundle\IssueBundle\Entity\IssueResolution;

@@ -98,7 +98,7 @@ class IssuePriority
      * Set label
      *
      * @param string $label
-     * @return IssuePriority
+     * @return $this
      */
     public function setLabel($label)
     {
@@ -121,7 +121,7 @@ class IssuePriority
      * Set order
      *
      * @param integer $order
-     * @return IssuePriority
+     * @return $this
      */
     public function setOrder($order)
     {
@@ -140,6 +140,9 @@ class IssuePriority
         return $this->order;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->getLabel();

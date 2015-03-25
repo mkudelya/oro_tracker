@@ -70,7 +70,7 @@ class IssueResolution
      * Set name
      *
      * @param string $name
-     * @return Resolution
+     * @return $this
      */
     public function setName($name)
     {
@@ -93,7 +93,7 @@ class IssueResolution
      * Set label
      *
      * @param string $label
-     * @return IssueResolution
+     * @return $this
      */
     public function setLabel($label)
     {

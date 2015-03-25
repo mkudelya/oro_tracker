@@ -2,8 +2,9 @@
 
 namespace Oro\Bundle\IssueBundle\Datagrid;
 
-use Oro\Bundle\IssueBundle\Form\Type\IssueType;
 use Doctrine\ORM\EntityManager;
+
+use Oro\Bundle\IssueBundle\Form\Type\IssueType;
 
 class GridHelper
 {
@@ -20,11 +21,17 @@ class GridHelper
         $this->em = $em;
     }
 
+    /**
+     * @return array
+     */
     public function getTypeChoices()
     {
         return (new IssueType())->getIssueTypes();
     }
 
+    /**
+     * @return array
+     */
     public function getPriorityChoices()
     {
         $result = [];
@@ -36,6 +43,9 @@ class GridHelper
         return $result;
     }
 
+    /**
+     * @return array
+     */
     public function getResolutionChoices()
     {
         $result = [];

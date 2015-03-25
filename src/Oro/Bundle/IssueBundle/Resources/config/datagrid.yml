@@ -186,15 +186,15 @@ datagrid:
             toolbarOptions:
                 hide: true
 
-    assignee-issue-grid:
+    assignee-reporter-issue-grid:
         extends: issue-grid
         source:
             query:
                 where:
                     and:
-                        - issue.assignee = :assignee_id
+                        - issue.assignee = :user_id or issue.reporter = :user_id
             bind_parameters:
-                - assignee_id
+                - user_id
         filters: ~
         options:
             toolbarOptions:

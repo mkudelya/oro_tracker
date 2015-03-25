@@ -44,9 +44,15 @@ use Oro\Bundle\TagBundle\Entity\Taggable;
  *          },
  *          "workflow"={
  *              "active_workflow"="issue_flow"
+ *          },
+ *          "grouping"={
+ *              "groups"={"activity"}
  *          }
  *      }
  * )
+ * @SuppressWarnings(PHPMD.TooManyFields)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class Issue extends ExtendIssue implements Taggable
 {
@@ -396,7 +402,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set code
      *
      * @param string $code
-     * @return Issue
+     * @return $this
      */
     public function setCode($code)
     {
@@ -423,7 +429,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set summary
      *
      * @param string $summary
-     * @return Issue
+     * @return $this
      */
     public function setSummary($summary)
     {
@@ -446,7 +452,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set description
      *
      * @param string $description
-     * @return Issue
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -469,7 +475,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set created
      *
      * @param \DateTime $created
-     * @return Issue
+     * @return $this
      */
     public function setCreatedAt($created)
     {
@@ -492,7 +498,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set updated
      *
      * @param \DateTime $updated
-     * @return Issue
+     * @return $this
      */
     public function setUpdatedAt($updated)
     {
@@ -515,7 +521,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set priority
      *
      * @param \Oro\Bundle\IssueBundle\Entity\IssuePriority $priority
-     * @return Issue
+     * @return $this
      */
     public function setPriority(\Oro\Bundle\IssueBundle\Entity\IssuePriority $priority = null)
     {
@@ -538,7 +544,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set resolution
      *
      * @param \Oro\Bundle\IssueBundle\Entity\IssueResolution $resolution
-     * @return Issue
+     * @return $this
      */
     public function setResolution(\Oro\Bundle\IssueBundle\Entity\IssueResolution $resolution = null)
     {
@@ -561,7 +567,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set workflowItem
      *
      * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
-     * @return Issue
+     * @return $this
      */
     public function setWorkflowItem(\Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem = null)
     {
@@ -584,7 +590,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set workflowStep
      *
      * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
-     * @return Issue
+     * @return $this
      */
     public function setWorkflowStep(\Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep = null)
     {
@@ -607,7 +613,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set reporter
      *
      * @param \Oro\Bundle\UserBundle\Entity\User $reporter
-     * @return Issue
+     * @return $this
      */
     public function setReporter(\Oro\Bundle\UserBundle\Entity\User $reporter = null)
     {
@@ -630,7 +636,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set assignee
      *
      * @param \Oro\Bundle\UserBundle\Entity\User $assignee
-     * @return Issue
+     * @return $this
      */
     public function setAssignee(\Oro\Bundle\UserBundle\Entity\User $assignee = null)
     {
@@ -653,7 +659,7 @@ class Issue extends ExtendIssue implements Taggable
      * Add related
      *
      * @param Issue $related
-     * @return Issue
+     * @return $this
      */
     public function setRelated(Issue $related)
     {
@@ -664,7 +670,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Remove related
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\Issue $related
+     * @param Issue $related
      */
     public function removeRelated(Issue $related)
     {
@@ -685,7 +691,7 @@ class Issue extends ExtendIssue implements Taggable
      * Add collaborator
      *
      * @param User $collaborator
-     * @return Issue
+     * @return $this
      */
     public function addCollaborator(User $collaborator)
     {
@@ -739,7 +745,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set parent
      *
      * @param \Oro\Bundle\IssueBundle\Entity\Issue $parent
-     * @return Issue
+     * @return $this
      */
     public function setParent(\Oro\Bundle\IssueBundle\Entity\Issue $parent = null)
     {
@@ -762,7 +768,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set children
      *
      * @param Issue $children
-     * @return Issue
+     * @return $this
      */
     public function addChild(Issue $children)
     {
@@ -795,7 +801,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set owner
      *
      * @param \Oro\Bundle\UserBundle\Entity\User $owner
-     * @return Issue
+     * @return $this
      */
     public function setOwner(\Oro\Bundle\UserBundle\Entity\User $owner = null)
     {
@@ -818,7 +824,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set organization
      *
      * @param Organization $organization
-     * @return Issue
+     * @return $this
      */
     public function setOrganization(Organization $organization = null)
     {
@@ -841,7 +847,7 @@ class Issue extends ExtendIssue implements Taggable
      * Set type
      *
      * @param string $type
-     * @return Issue
+     * @return $this
      */
     public function setType($type)
     {

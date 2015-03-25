@@ -134,6 +134,7 @@ class IssueController extends RestController
      *      resource=true
      * )
      * @AclAncestor("oro_issue_create")
+     * @return Response
      */
     public function postAction()
     {
@@ -144,7 +145,7 @@ class IssueController extends RestController
      * REST DELETE
      *
      * @param int $id
-     *
+     * @return Response
      *
      * @ApiDoc(
      *      description="Delete Issue",
@@ -156,7 +157,6 @@ class IssueController extends RestController
      *      permission="DELETE",
      *      class="OroIssueBundle:Issue"
      * )
-     * @return Response
      */
     public function deleteAction($id)
     {

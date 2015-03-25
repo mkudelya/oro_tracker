@@ -29,6 +29,7 @@
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>
                 <directory>../src/*/Bundle/*Bundle/Tests</directory>
                 <directory>../src/*/Bundle/*Bundle/Migrations</directory>
+                <directory>../src/*/Bundle/*Bundle/ImportExport</directory>
                 <file>../src/*/Bundle/*Bundle/OroIssueBundle.php</file>
             </exclude>
         </whitelist>

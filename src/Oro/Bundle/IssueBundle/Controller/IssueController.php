@@ -12,7 +12,6 @@ use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 class IssueController extends Controller
 {
-
     /**
      * @Route(name="oro_issue_index")
      * @Template()
@@ -72,6 +71,8 @@ class IssueController extends Controller
      *      class="OroIssueBundle:Issue",
      *      permission="EDIT"
      * )
+     * @param Issue $issue
+     * @return array
      */
     public function updateAction(Issue $issue)
     {
@@ -83,7 +84,7 @@ class IssueController extends Controller
     /**
      * @param Issue $issue
      * @param string $formAction
-     * @param null $parentIssueCode
+     * @param string $parentIssueCode
      * @return array
      */
     public function update(Issue $issue, $formAction, $parentIssueCode = null)
