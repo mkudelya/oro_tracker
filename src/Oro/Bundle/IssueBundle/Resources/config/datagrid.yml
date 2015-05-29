@@ -170,7 +170,6 @@ datagrid:
                 where:
                     and:
                         - issue.parent IS NULL
-        filters: ~
 
     sub-issue-grid:
         extends: issue-grid
