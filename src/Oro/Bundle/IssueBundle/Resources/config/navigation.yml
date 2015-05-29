@@ -3,6 +3,8 @@ oro_menu_config:
         issue_list:
             label: 'oro.issue.entity_plural.label'
             route: 'oro_issue_index'
+            extras:
+                position: 1
     tree:
         application_menu:
             children:
