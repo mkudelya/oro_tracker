@@ -95,13 +95,14 @@ class IssueHandler implements TagHandlerInterface
         }
 
         //user can't change issue type
-        if ($entity->getId() || $parentIssueCode) {
+        if ($entity->getId()) {
             $this->form->remove('type');
         } else {
-            $entity->setAssignee($currentUser);
+            $entity->setReporter($currentUser);
         }
 
         if ($parentIssueCode) {
+            $this->form->remove('type');
             $entity->setType(IssueType::TASK);
         }
 

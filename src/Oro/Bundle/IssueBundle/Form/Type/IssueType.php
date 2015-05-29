@@ -85,15 +85,6 @@ class IssueType extends AbstractType
                 ]
             )
             ->add(
-                'reporter',
-                'translatable_entity',
-                [
-                    'label' => 'oro.issue.reporter.label',
-                    'class' => 'Oro\Bundle\UserBundle\Entity\User',
-                    'required' => true
-                ]
-            )
-            ->add(
                 'related',
                 'translatable_entity',
                 [
