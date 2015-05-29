@@ -2,6 +2,7 @@
 
 namespace Oro\Bundle\IssueBundle\Form\Handler;
 
+use Oro\Bundle\IssueBundle\Form\Type\IssueType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -94,12 +95,15 @@ class IssueHandler implements TagHandlerInterface
         }
 
         //user can't change issue type
-        if ($entity->getId()) {
+        if ($entity->getId() || $parentIssueCode) {
             $this->form->remove('type');
         } else {
             $entity->setAssignee($currentUser);
         }
 
+        if ($parentIssueCode) {
+            $entity->setType(IssueType::TASK);
+        }
 
         $this->form->setData($entity);
 
@@ -108,7 +112,7 @@ class IssueHandler implements TagHandlerInterface
 
             if ($this->form->isValid()) {
 
-                if (!is_null($parentIssueCode)) {
+                if ($parentIssueCode) {
                     $parent = $this->manager->getRepository('OroIssueBundle:Issue')->findOneByCode($parentIssueCode);
                     $entity->setParent($parent);
                 }

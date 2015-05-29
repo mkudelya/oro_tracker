@@ -6,17 +6,19 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-use Oro\Bundle\IssueBundle\Entity\Issue;
-
 class IssueType extends AbstractType
 {
+    const BUG = 'bug';
+    const TASK = 'task';
+    const STORY = 'story';
+
     /**
      * @var array
      */
     protected $types = array(
-        'bug' => 'Bug',
-        'task' => 'Task',
-        'story' => 'Story'
+        self::BUG => 'Bug',
+        self::TASK => 'Task',
+        self::STORY => 'Story'
     );
 
     /**
@@ -45,7 +47,7 @@ class IssueType extends AbstractType
                 'type',
                 'choice',
                 array(
-                    'choices' => $this->types,
+                    'choices' => $this->getIssueTypes(),
                     'label' => 'oro.issue.type.label',
                     'required' => true
                 )
