@@ -16,17 +16,17 @@ class LoadIssuePriority extends AbstractFixture
         array(
             'name' => 'major',
             'label' => 'Major',
-            'order' => 4,
+            'order' => 3,
         ),
         array(
             'name' => 'blocker',
             'label' => 'Blocker',
-            'order' => 3,
+            'order' => 5,
         ),
         array(
             'name' => 'critical',
             'label' => 'Critical',
-            'order' => 5,
+            'order' => 4,
         ),
         array(
             'name' => 'minor',
