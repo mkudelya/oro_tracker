@@ -8,7 +8,7 @@
 
 {% block navButtons %}
     {% if entity.type == 'story' and resource_granted('oro_issue_create') %}
-        {{ UI.addButton({
+        &nbsp;&nbsp;{{ UI.addButton({
         'path' : path('oro_subissue_create', {'parentIssueCode' : entity.code}),
         'entity_label': 'oro.issue.subentity.label'|trans
         }) }}
@@ -122,4 +122,12 @@
     {% set data = { 'dataBlocks': dataBlocks } %}
 
     {{ parent() }}
+
+    <script type="text/javascript">
+        require(['oroui/js/mediator', 'oroui/js/widget-manager'], function(mediator, widgetManager) {
+            mediator.subscribe('widget_success:note-dialog', function() {
+                mediator.trigger('datagrid:doRefresh:collaborators-grid');
+            });
+        });
+    </script>
 {% endblock content_data %}
