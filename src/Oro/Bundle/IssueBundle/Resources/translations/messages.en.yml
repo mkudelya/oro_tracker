@@ -36,6 +36,9 @@ oro:
     widget:
         status_bar_chart_label: Bar chart by issue status
         issue_short_grid: User's issues
+    dashboard:
+        issue:
+            full_list: Full List
 Full list: Full list
 Cancel: Cancel
 Save: Save
