@@ -71,10 +71,11 @@
             {{ UI.renderHtmlProperty('oro.issue.owner.label'|trans, ownerData) }}
 
             {% if entity.parent is not empty %}
+                {% set parentLabel = 'oro.issue.story.label'|trans ~ ': ' ~ entity.parent.summary %}
                     {{ UI.button({
                     'path':  path('oro_issue_view', {'id': entity.parent.id}),
-                    'label': 'oro.issue.parent_issue.label'|trans,
-                    'title': 'oro.issue.parent_issue.label'|trans,
+                    'label': parentLabel,
+                    'title': parentLabel,
                     }) }}
             {% endif %}
         </div>
