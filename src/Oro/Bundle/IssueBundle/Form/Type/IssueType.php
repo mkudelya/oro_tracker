@@ -6,6 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
+use Doctrine\ORM\EntityRepository;
+
 class IssueType extends AbstractType
 {
     const BUG = 'bug';
@@ -66,7 +68,11 @@ class IssueType extends AbstractType
                 [
                     'label' => 'oro.issue.priority.label',
                     'class' => 'Oro\Bundle\IssueBundle\Entity\IssuePriority',
-                    'required' => true
+                    'required' => true,
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('p')
+                            ->orderBy('p.order', 'DESC');
+                    }
                 ]
             )
             ->add(
