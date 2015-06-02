@@ -1,3 +1,8 @@
 workflows:
     issue_flow:
-        attributes: ~
+        attributes:
+            issue_resolution:
+                label: 'Resolution'
+                type: entity
+                options:
+                    class: Oro\Bundle\IssueBundle\Entity\IssueResolution

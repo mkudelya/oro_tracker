@@ -111,7 +111,7 @@ class Issue extends ExtendIssue implements Taggable
     protected $description;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      * @ConfigField(
      *    defaultValues={
      *        "importexport"={

@@ -109,7 +109,7 @@ class OroIssueBundle implements Migration
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
         $table->addColumn('name', 'string', ['length' => 255]);
         $table->addColumn('label', 'string', ['length' => 255]);
-        $table->addColumn('order', 'integer', ['notnull' => false]);
+        $table->addColumn('order', 'integer', ['default' => '1']);
         $table->setPrimaryKey(['id']);
     }
 

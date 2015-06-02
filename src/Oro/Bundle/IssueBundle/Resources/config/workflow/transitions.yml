@@ -19,12 +19,28 @@ workflows:
                 frontend_options:
                     icon: 'icon-stop'
                 transition_definition: resolve_definition
+                form_options:
+                    attribute_fields:
+                        issue_resolution:
+                            form_type: entity
+                            options:
+                                class: Oro\Bundle\IssueBundle\Entity\IssueResolution
+                                property: label
+                                required: true
             close:
                 label: 'Close'
                 step_to: closed
                 frontend_options:
                     icon: 'icon-ok'
                 transition_definition: closed_definition
+                form_options:
+                    attribute_fields:
+                        issue_resolution:
+                            form_type: entity
+                            options:
+                                class: Oro\Bundle\IssueBundle\Entity\IssueResolution
+                                property: label
+                                required: true
             reopen:
                 label: 'Reopen'
                 step_to: reopen
