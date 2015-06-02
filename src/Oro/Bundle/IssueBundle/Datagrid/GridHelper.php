@@ -26,7 +26,7 @@ class GridHelper
      */
     public function getTypeChoices()
     {
-        return (new IssueType())->getIssueTypes();
+        return (IssueType::getIssueTypes());
     }
 
     /**

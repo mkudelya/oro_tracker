@@ -17,7 +17,7 @@ class IssueType extends AbstractType
     /**
      * @var array
      */
-    protected $types = array(
+    protected static $types = array(
         self::BUG => 'Bug',
         self::TASK => 'Task',
         self::STORY => 'Story'
@@ -49,7 +49,7 @@ class IssueType extends AbstractType
                 'type',
                 'choice',
                 array(
-                    'choices' => $this->getIssueTypes(),
+                    'choices' => self::getIssueTypes(),
                     'label' => 'oro.issue.type.label',
                     'required' => true
                 )
@@ -123,8 +123,11 @@ class IssueType extends AbstractType
         return 'oro_issue';
     }
 
-    public function getIssueTypes()
+    /**
+     * @return array
+     */
+    public static function getIssueTypes()
     {
-        return $this->types;
+        return self::$types;
     }
 }
