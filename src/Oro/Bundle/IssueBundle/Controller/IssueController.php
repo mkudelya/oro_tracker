@@ -32,6 +32,26 @@ class IssueController extends Controller
 
     /**
      * @Route("/create", name="oro_issue_create")
+     * @Acl(
+     *      id="oro_issue_create",
+     *      type="entity",
+     *      class="OroIssueBundle:Issue",
+     *      permission="CREATE"
+     * )
+     * @Template("OroIssueBundle:Issue:update.html.twig")
+     * @return array
+     */
+    public function createAction()
+    {
+        $issue = new Issue();
+
+        $formAction = $this->get('oro_entity.routing_helper')
+            ->generateUrlByRequest('oro_issue_create', $this->getRequest());
+
+        return $this->update($issue, $formAction, null);
+    }
+
+    /**
      * @Route("/create/subtask/{parentIssueCode}", name="oro_subissue_create")
      * @Acl(
      *      id="oro_issue_create",
@@ -43,21 +63,16 @@ class IssueController extends Controller
      * @param string $parentIssueCode
      * @return array
      */
-    public function createAction($parentIssueCode = null)
+    public function createSubissueAction($parentIssueCode)
     {
         $issue = new Issue();
 
-        if ($parentIssueCode) {
-            $formAction = $this->get('oro_entity.routing_helper')
-                ->generateUrlByRequest(
-                    'oro_subissue_create',
-                    $this->getRequest(),
-                    array('parentIssueCode' => $parentIssueCode)
-                );
-        } else {
-            $formAction = $this->get('oro_entity.routing_helper')
-                ->generateUrlByRequest('oro_issue_create', $this->getRequest());
-        }
+        $formAction = $this->get('oro_entity.routing_helper')
+            ->generateUrlByRequest(
+                'oro_subissue_create',
+                $this->getRequest(),
+                array('parentIssueCode' => $parentIssueCode)
+            );
 
         return $this->update($issue, $formAction, $parentIssueCode);
     }
