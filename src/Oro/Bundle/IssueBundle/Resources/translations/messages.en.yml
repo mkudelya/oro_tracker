@@ -33,12 +33,13 @@ oro:
         parent.label: Parent
         workflow_item.label: Workflow Item
         story.label: Story
+        cancel.label: Cancel
+        save.label: Save
     widget:
         status_bar_chart_label: Bar chart by issue status
         issue_short_grid: User's issues
     dashboard:
         issue:
             full_list: Full List
-Full list: Full list
-Cancel: Cancel
-Save: Save
+    menu:
+        shortcut_new_issue.label: Create new issue

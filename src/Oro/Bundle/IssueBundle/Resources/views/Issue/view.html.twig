@@ -9,24 +9,24 @@
 {% block navButtons %}
     {% if entity.type == 'story' and resource_granted('oro_issue_create') %}
         &nbsp;&nbsp;{{ UI.addButton({
-        'path' : path('oro_subissue_create', {'parentIssueCode' : entity.code}),
-        'entity_label': 'oro.issue.subentity.label'|trans
+            'path' : path('oro_subissue_create', {'parentIssueCode' : entity.code}),
+            'entity_label': 'oro.issue.subentity.label'|trans
         }) }}
     {% endif %}
     {% if resource_granted('EDIT', entity) %}
         {{ UI.editButton({
-        'path' : path('oro_issue_update', { id: entity.id }),
-        'entity_label': 'oro.issue.entity.label'|trans
+            'path' : path('oro_issue_update', { id: entity.id }),
+            'entity_label': 'oro.issue.entity.label'|trans
         }) }}
     {% endif %}
     {% if resource_granted('DELETE', entity) %}
         {{ UI.deleteButton({
-        'dataUrl': path('oro_api_delete_issue', {'id': entity.id}),
-        'dataRedirect': path('oro_issue_index'),
-        'aCss': 'no-hash remove-button',
-        'id': 'btn-remove-user',
-        'dataId': entity.id,
-        'entity_label': 'oro.issue.entity.label'|trans
+            'dataUrl': path('oro_api_delete_issue', {'id': entity.id}),
+            'dataRedirect': path('oro_issue_index'),
+            'aCss': 'no-hash remove-button',
+            'id': 'btn-remove-user',
+            'dataId': entity.id,
+            'entity_label': 'oro.issue.entity.label'|trans
         }) }}
     {% endif %}
 {% endblock navButtons %}
@@ -93,29 +93,36 @@
     {
     'title': 'General Information'|trans,
     'class': 'active',
-    'subblocks': [
-    {'data' : [issueInformation]}
-    ]
+    'subblocks':
+        [
+            {
+                'data' : [issueInformation]
+            }
+        ]
     }
     ] %}
 
     {% if entity.type == 'story' %}
         {% set dataBlocks = dataBlocks|merge([{
-        'title': 'oro.issue.subissue.label'|trans,
-        'subblocks': [{
-        'title': '',
-        'useSpan': false,
-        'data' : [dataGrid.renderGrid('sub-issue-grid', {'parent_id': entity.id})]
+            'title': 'oro.issue.subissue.label'|trans,
+            'subblocks': [{
+            'title': '',
+            'useSpan': false,
+            'data' : [
+                        dataGrid.renderGrid('sub-issue-grid', {'parent_id': entity.id})
+                     ]
         }]
         }] ) %}
     {% endif %}
 
     {% set dataBlocks = dataBlocks|merge([{
-    'title': 'oro.issue.collaborators.label'|trans,
-    'subblocks': [{
-    'title': '',
-    'useSpan': false,
-    'data' : [dataGrid.renderGrid('collaborators-grid', {'issue_id': entity.id})]
+        'title': 'oro.issue.collaborators.label'|trans,
+        'subblocks': [{
+        'title': '',
+        'useSpan': false,
+        'data' : [
+                    dataGrid.renderGrid('collaborators-grid', {'issue_id': entity.id})
+                 ]
     }]
     }] ) %}
 

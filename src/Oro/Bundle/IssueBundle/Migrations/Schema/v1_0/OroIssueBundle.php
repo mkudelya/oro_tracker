@@ -19,16 +19,16 @@ class OroIssueBundle implements Migration
     public function up(Schema $schema, QueryBag $queries)
     {
         /** Tables generation **/
-        $this->createOroIssueIssueTable($schema);
-        $this->createOroIssueIssueCollaboratorsTable($schema);
-        $this->createOroIssueIssueRelationTable($schema);
-        $this->createOroIssuePriorityTable($schema);
-        $this->createOroIssueResolutionTable($schema);
+        self::createOroIssueIssueTable($schema);
+        self::createOroIssueIssueCollaboratorsTable($schema);
+        self::createOroIssueIssueRelationTable($schema);
+        self::createOroIssuePriorityTable($schema);
+        self::createOroIssueResolutionTable($schema);
 
         /** Foreign keys generation **/
-        $this->addOroIssueIssueForeignKeys($schema);
-        $this->addOroIssueIssueCollaboratorsForeignKeys($schema);
-        $this->addOroIssueIssueRelationForeignKeys($schema);
+        self::addOroIssueIssueForeignKeys($schema);
+        self::addOroIssueIssueCollaboratorsForeignKeys($schema);
+        self::addOroIssueIssueRelationForeignKeys($schema);
     }
 
     /**
@@ -36,7 +36,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function createOroIssueIssueTable(Schema $schema)
+    public static function createOroIssueIssueTable(Schema $schema)
     {
         $table = $schema->createTable('oro_issue_issue');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -73,7 +73,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function createOroIssueIssueCollaboratorsTable(Schema $schema)
+    public static function createOroIssueIssueCollaboratorsTable(Schema $schema)
     {
         $table = $schema->createTable('oro_issue_issue_collaborators');
         $table->addColumn('issue_id', 'integer', []);
@@ -88,7 +88,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function createOroIssueIssueRelationTable(Schema $schema)
+    public static function createOroIssueIssueRelationTable(Schema $schema)
     {
         $table = $schema->createTable('oro_issue_issue_relation');
         $table->addColumn('issue_source', 'integer', []);
@@ -103,7 +103,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function createOroIssuePriorityTable(Schema $schema)
+    public static function createOroIssuePriorityTable(Schema $schema)
     {
         $table = $schema->createTable('oro_issue_priority');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -118,7 +118,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function createOroIssueResolutionTable(Schema $schema)
+    public static function createOroIssueResolutionTable(Schema $schema)
     {
         $table = $schema->createTable('oro_issue_resolution');
         $table->addColumn('id', 'integer', ['autoincrement' => true]);
@@ -132,7 +132,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function addOroIssueIssueForeignKeys(Schema $schema)
+    public static function addOroIssueIssueForeignKeys(Schema $schema)
     {
         $table = $schema->getTable('oro_issue_issue');
         $table->addForeignKeyConstraint(
@@ -196,7 +196,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function addOroIssueIssueCollaboratorsForeignKeys(Schema $schema)
+    public static function addOroIssueIssueCollaboratorsForeignKeys(Schema $schema)
     {
         $table = $schema->getTable('oro_issue_issue_collaborators');
         $table->addForeignKeyConstraint(
@@ -218,7 +218,7 @@ class OroIssueBundle implements Migration
      *
      * @param Schema $schema
      */
-    protected function addOroIssueIssueRelationForeignKeys(Schema $schema)
+    public static function addOroIssueIssueRelationForeignKeys(Schema $schema)
     {
         $table = $schema->getTable('oro_issue_issue_relation');
         $table->addForeignKeyConstraint(

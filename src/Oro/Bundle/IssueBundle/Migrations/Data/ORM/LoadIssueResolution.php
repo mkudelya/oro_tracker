@@ -12,34 +12,34 @@ class LoadIssueResolution extends AbstractFixture
     /**
      * @var array
      */
-    protected $data = array(
+    protected static $data = array(
         array(
             'name' => 'fixed',
-            'label' => 'Fixed',
+            'label' => 'Fixed'
         ),
         array(
             'name' => 'wont_fix',
-            'label' => 'Won\'t Fix',
+            'label' => 'Won\'t Fix'
         ),
         array(
             'name' => 'duplicate',
-            'label' => 'Duplicate',
+            'label' => 'Duplicate'
         ),
         array(
             'name' => 'incomplete',
-            'label' => 'Incomplete',
+            'label' => 'Incomplete'
         ),
         array(
             'name' => 'cannot_reproduce',
-            'label' => 'Cannot Reproduce',
+            'label' => 'Cannot Reproduce'
         ),
         array(
             'name' => 'done',
-            'label' => 'Done',
+            'label' => 'Done'
         ),
         array(
             'name' => 'wont_do',
-            'label' => 'Won\'t Do',
+            'label' => 'Won\'t Do'
         ),
     );
 
@@ -48,7 +48,7 @@ class LoadIssueResolution extends AbstractFixture
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->data as $item) {
+        foreach (self::$data as $item) {
             $entity = new IssueResolution();
             $entity->setLabel($item['label']);
             $entity->setName($item['name']);

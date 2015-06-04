@@ -24,12 +24,11 @@ class IssueResolutionTest extends AbstractEntityTestCase
     {
         $label = 'label';
         $name = 'name';
-        $order = 1;
 
         return [
             'id' => ['id', 1, 1],
             'label'     => ['label', $label, $label],
-            'name'     => ['name', $name, $name],
+            'name'     => ['name', $name, $name]
         ];
     }
 }

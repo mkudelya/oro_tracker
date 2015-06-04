@@ -1,0 +1,3 @@
+oro_issue_api:
+    resource:     "@OroIssueBundle/Controller/Api/Rest/IssueController.php"
+    type:         rest

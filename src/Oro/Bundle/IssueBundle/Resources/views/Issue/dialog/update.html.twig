@@ -27,12 +27,11 @@
                     {{ form_row(form.description) }}
                     {{ form_row(form.priority) }}
                     {{ form_row(form.assignee) }}
-                    {{ form_row(form.reporter) }}
                     {{ form_row(form.related) }}
                     {{ form_row(form.owner) }}
                     <div class="widget-actions form-actions" style="display: none;">
-                        <button class="btn" type="reset">{{ 'Cancel'|trans }}</button>
-                        <button class="btn btn-primary" type="submit">{{ 'Save'|trans }}</button>
+                        <button class="btn" type="reset">{{ 'oro.issue.cancel.label'|trans }}</button>
+                        <button class="btn btn-primary" type="submit">{{ 'oro.issue.save.label'|trans }}</button>
                     </div>
                 </fieldset>
             {{ form_end(form) }}

@@ -12,31 +12,31 @@ class LoadIssuePriority extends AbstractFixture
     /**
      * @var array
      */
-    protected $data = array(
+    protected static $data = array(
         array(
             'name' => 'major',
             'label' => 'Major',
-            'order' => 3,
+            'order' => 3
         ),
         array(
             'name' => 'blocker',
             'label' => 'Blocker',
-            'order' => 5,
+            'order' => 5
         ),
         array(
             'name' => 'critical',
             'label' => 'Critical',
-            'order' => 4,
+            'order' => 4
         ),
         array(
             'name' => 'minor',
             'label' => 'Minor',
-            'order' => 2,
+            'order' => 2
         ),
         array(
             'name' => 'trivial',
             'label' => 'Trivial',
-            'order' => 1,
+            'order' => 1
         ),
     );
 
@@ -45,7 +45,7 @@ class LoadIssuePriority extends AbstractFixture
      */
     public function load(ObjectManager $manager)
     {
-        foreach ($this->data as $item) {
+        foreach (self::$data as $item) {
             $entity = new IssuePriority();
             $entity->setLabel($item['label']);
             $entity->setName($item['name']);

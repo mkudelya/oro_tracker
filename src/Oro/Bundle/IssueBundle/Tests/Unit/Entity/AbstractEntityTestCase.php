@@ -2,10 +2,15 @@
 
 namespace Oro\Bundle\IssueBundle\Tests\Unit\Entity;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
+
 abstract class AbstractEntityTestCase extends \PHPUnit_Framework_TestCase
 {
     const TEST_ID = 123;
 
+    /**
+     * @var object
+     */
     protected $entity;
 
     protected function setUp()
@@ -28,11 +33,9 @@ abstract class AbstractEntityTestCase extends \PHPUnit_Framework_TestCase
      */
     public function testSetGet($property, $value = null, $expected = null)
     {
-        if ($value !== null) {
-            call_user_func_array(array($this->entity, 'set' . ucfirst($property)), array($value));
-        }
-
-        $this->assertEquals($expected, call_user_func_array(array($this->entity, 'get' . ucfirst($property)), array()));
+        $accessor = PropertyAccess::createPropertyAccessor();
+        $accessor->setValue($this->entity, $property, $value);
+        $this->assertEquals($expected, $accessor->getValue($this->entity, $property));
     }
 
     /**

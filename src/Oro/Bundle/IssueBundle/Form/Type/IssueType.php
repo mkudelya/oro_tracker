@@ -17,11 +17,11 @@ class IssueType extends AbstractType
     /**
      * @var array
      */
-    protected static $types = array(
+    protected static $types = [
         self::BUG => 'Bug',
         self::TASK => 'Task',
         self::STORY => 'Story'
-    );
+    ];
 
     /**
      * {@inheritdoc}
@@ -96,9 +96,9 @@ class IssueType extends AbstractType
             )->add(
                 'tags',
                 'oro_tag_select',
-                array(
+                [
                     'label' => 'oro.tag.entity_plural_label'
-                )
+                ]
             );
     }
 

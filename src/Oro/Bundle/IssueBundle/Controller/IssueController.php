@@ -110,11 +110,11 @@ class IssueController extends Controller
                 return $this->get('oro_ui.router')->redirectAfterSave(
                     array(
                         'route' => 'oro_issue_update',
-                        'parameters' => array('id' => $issue->getId()),
+                        'parameters' => array('id' => $issue->getId())
                     ),
                     array(
                         'route' => 'oro_issue_view',
-                        'parameters' => array('id' => $issue->getId()),
+                        'parameters' => array('id' => $issue->getId())
                     )
                 );
             }
@@ -125,7 +125,7 @@ class IssueController extends Controller
             'entity'     => $issue,
             'saved'      => $saved,
             'form'       => $this->get('oro_issue.form.handler.issue')->getForm()->createView(),
-            'formAction' => $formAction,
+            'formAction' => $formAction
         );
     }
 

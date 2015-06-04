@@ -8,9 +8,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use Oro\Bundle\IssueBundle\Entity\Issue;
-use Oro\Bundle\IssueBundle\Form\Handler\IssueHandler;
 use Oro\Bundle\TagBundle\Entity\TagManager;
 use Oro\Bundle\TagBundle\Form\Handler\TagHandlerInterface;
+use Oro\Bundle\SecurityBundle\SecurityFacade;
 
 class IssueApiHandler implements TagHandlerInterface
 {
@@ -34,17 +34,25 @@ class IssueApiHandler implements TagHandlerInterface
      */
     protected $tagManager;
 
+    /** @var SecurityFacade */
+    protected $securityFacade;
+
     /**
-     *
      * @param FormInterface $form
-     * @param Request       $request
+     * @param Request $request
      * @param ObjectManager $manager
+     * @param SecurityFacade $securityFacade
      */
-    public function __construct(FormInterface $form, Request $request, ObjectManager $manager)
-    {
+    public function __construct(
+        FormInterface $form,
+        Request $request,
+        ObjectManager $manager,
+        SecurityFacade $securityFacade
+    ) {
         $this->form    = $form;
         $this->request = $request;
         $this->manager = $manager;
+        $this->securityFacade = $securityFacade;
     }
 
     /**
@@ -55,9 +63,16 @@ class IssueApiHandler implements TagHandlerInterface
      */
     public function process(Issue $entity)
     {
+        //user can't change issue type
+        if ($entity->getId()) {
+            $this->form->remove('type');
+        } else {
+            $entity->setReporter($this->securityFacade->getLoggedUser());
+        }
+
         $this->form->setData($entity);
 
-        if (in_array($this->request->getMethod(), array('POST', 'PUT'))) {
+        if (in_array($this->request->getMethod(), ['POST', 'PUT'])) {
             $this->form->submit($this->request);
 
             if ($this->form->isValid()) {

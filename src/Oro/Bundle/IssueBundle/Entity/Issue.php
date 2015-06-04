@@ -16,6 +16,8 @@ use Oro\Bundle\WorkflowBundle\Entity\WorkflowItem;
 use Oro\Bundle\WorkflowBundle\Entity\WorkflowStep;
 use Oro\Bundle\TagBundle\Entity\Tag;
 use Oro\Bundle\TagBundle\Entity\Taggable;
+use Oro\Bundle\IssueBundle\Entity\IssuePriority;
+use Oro\Bundle\IssueBundle\Entity\IssueResolution;
 
 /**
  * @ORM\Entity(repositoryClass="Oro\Bundle\IssueBundle\Entity\Repository\IssueRepository")
@@ -276,18 +278,6 @@ class Issue extends ExtendIssue implements Taggable
     protected $children;
 
     /**
-     * @var \stdClass
-     * @ConfigField(
-     *    defaultValues={
-     *        "importexport"={
-     *            "excluded"=true
-     *        }
-     *    }
-     * )
-     */
-    protected $notes;
-
-    /**
      * @ORM\Column(type="datetime")
      * @ConfigField(
      *    defaultValues={
@@ -344,9 +334,9 @@ class Issue extends ExtendIssue implements Taggable
      */
     public function __construct()
     {
-        $this->related = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->collaborators = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->related = new ArrayCollection();
+        $this->collaborators = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     /**
@@ -380,7 +370,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -418,7 +408,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get code
      *
-     * @return string 
+     * @return string
      */
     public function getCode()
     {
@@ -441,7 +431,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get summary
      *
-     * @return string 
+     * @return string
      */
     public function getSummary()
     {
@@ -464,7 +454,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -487,7 +477,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedAt()
     {
@@ -510,7 +500,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getUpdatedAt()
     {
@@ -520,10 +510,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set priority
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\IssuePriority $priority
+     * @param IssuePriority $priority
      * @return $this
      */
-    public function setPriority(\Oro\Bundle\IssueBundle\Entity\IssuePriority $priority = null)
+    public function setPriority(IssuePriority $priority = null)
     {
         $this->priority = $priority;
 
@@ -533,7 +523,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get priority
      *
-     * @return \Oro\Bundle\IssueBundle\Entity\IssuePriority 
+     * @return IssuePriority
      */
     public function getPriority()
     {
@@ -543,10 +533,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set resolution
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\IssueResolution $resolution
+     * @param IssueResolution $resolution
      * @return $this
      */
-    public function setResolution(\Oro\Bundle\IssueBundle\Entity\IssueResolution $resolution = null)
+    public function setResolution(IssueResolution $resolution = null)
     {
         $this->resolution = $resolution;
 
@@ -556,7 +546,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get resolution
      *
-     * @return \Oro\Bundle\IssueBundle\Entity\IssueResolution 
+     * @return IssueResolution
      */
     public function getResolution()
     {
@@ -566,10 +556,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set workflowItem
      *
-     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem
+     * @param WorkflowItem $workflowItem
      * @return $this
      */
-    public function setWorkflowItem(\Oro\Bundle\WorkflowBundle\Entity\WorkflowItem $workflowItem = null)
+    public function setWorkflowItem(WorkflowItem $workflowItem = null)
     {
         $this->workflowItem = $workflowItem;
 
@@ -579,7 +569,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get workflowItem
      *
-     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowItem 
+     * @return WorkflowItem
      */
     public function getWorkflowItem()
     {
@@ -589,10 +579,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set workflowStep
      *
-     * @param \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep
+     * @param WorkflowStep $workflowStep
      * @return $this
      */
-    public function setWorkflowStep(\Oro\Bundle\WorkflowBundle\Entity\WorkflowStep $workflowStep = null)
+    public function setWorkflowStep(WorkflowStep $workflowStep = null)
     {
         $this->workflowStep = $workflowStep;
 
@@ -602,7 +592,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get workflowStep
      *
-     * @return \Oro\Bundle\WorkflowBundle\Entity\WorkflowStep 
+     * @return WorkflowStep
      */
     public function getWorkflowStep()
     {
@@ -612,10 +602,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set reporter
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $reporter
+     * @param User $reporter
      * @return $this
      */
-    public function setReporter(\Oro\Bundle\UserBundle\Entity\User $reporter = null)
+    public function setReporter(User $reporter = null)
     {
         $this->reporter = $reporter;
 
@@ -625,7 +615,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get reporter
      *
-     * @return \Oro\Bundle\UserBundle\Entity\User 
+     * @return User
      */
     public function getReporter()
     {
@@ -635,10 +625,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set assignee
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $assignee
+     * @param User $assignee
      * @return $this
      */
-    public function setAssignee(\Oro\Bundle\UserBundle\Entity\User $assignee = null)
+    public function setAssignee(User $assignee = null)
     {
         $this->assignee = $assignee;
 
@@ -648,7 +638,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get assignee
      *
-     * @return \Oro\Bundle\UserBundle\Entity\User 
+     * @return User
      */
     public function getAssignee()
     {
@@ -680,7 +670,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get related
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getRelated()
     {
@@ -705,7 +695,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Remove collaborator
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $collaborator
+     * @param User $collaborator
      */
     public function removeCollaborator(User $collaborator)
     {
@@ -715,7 +705,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get collaborator
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getCollaborators()
     {
@@ -723,7 +713,7 @@ class Issue extends ExtendIssue implements Taggable
     }
 
     /**
-     * @param \Oro\Bundle\UserBundle\Entity\User $user
+     * @param User $user
      * @return bool
      */
     public function hasCollaborator($user)
@@ -732,7 +722,7 @@ class Issue extends ExtendIssue implements Taggable
 
         if ($collaborators->count()) {
             foreach ($collaborators as $collaborator) {
-                if ($collaborator->getId() == $user->getId()) {
+                if ($collaborator->getId() === $user->getId()) {
                     return true;
                 }
             }
@@ -744,10 +734,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set parent
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\Issue $parent
+     * @param Issue $parent
      * @return $this
      */
-    public function setParent(\Oro\Bundle\IssueBundle\Entity\Issue $parent = null)
+    public function setParent(Issue $parent = null)
     {
         $this->parent = $parent;
 
@@ -757,7 +747,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get parent
      *
-     * @return \Oro\Bundle\IssueBundle\Entity\Issue 
+     * @return Issue
      */
     public function getParent()
     {
@@ -780,7 +770,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Remove children
      *
-     * @param \Oro\Bundle\IssueBundle\Entity\Issue $children
+     * @param Issue $children
      */
     public function removeChild(Issue $children)
     {
@@ -790,7 +780,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return ArrayCollection
      */
     public function getChildren()
     {
@@ -800,10 +790,10 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Set owner
      *
-     * @param \Oro\Bundle\UserBundle\Entity\User $owner
+     * @param User $owner
      * @return $this
      */
-    public function setOwner(\Oro\Bundle\UserBundle\Entity\User $owner = null)
+    public function setOwner(User $owner = null)
     {
         $this->owner = $owner;
 
@@ -813,7 +803,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get owner
      *
-     * @return \Oro\Bundle\UserBundle\Entity\User 
+     * @return User
      */
     public function getOwner()
     {
@@ -836,7 +826,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get organization
      *
-     * @return \Oro\Bundle\OrganizationBundle\Entity\Organization 
+     * @return Organization
      */
     public function getOrganization()
     {
@@ -859,7 +849,7 @@ class Issue extends ExtendIssue implements Taggable
     /**
      * Get type
      *
-     * @return string 
+     * @return string
      */
     public function getType()
     {

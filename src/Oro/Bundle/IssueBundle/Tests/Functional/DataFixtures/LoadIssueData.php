@@ -1,16 +1,17 @@
 <?php
 
-namespace Oro\Bundle\IssueBundle\Tests\Fixtures;
+namespace Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Oro\Bundle\IssueBundle\Entity\Issue;
 
-class IssueData extends AbstractFixture implements ContainerAwareInterface
+class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, DependentFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -20,6 +21,14 @@ class IssueData extends AbstractFixture implements ContainerAwareInterface
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+    }
+
+    /**
+     * @return array
+     */
+    public function getDependencies()
+    {
+        return array('Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures\LoadPriorityData');
     }
 
     public function load(ObjectManager $manager)

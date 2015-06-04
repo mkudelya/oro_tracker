@@ -16,10 +16,10 @@
 {% block pageHeader %}
     {% if entityId %}
         {% set breadcrumbs = {
-        'entity': entity,
-        'indexPath': path('oro_issue_index'),
-        'indexLabel': 'oro.issue.entity_plural.label'|trans,
-        'entityTitle': entity.summary
+            'entity': entity,
+            'indexPath': path('oro_issue_index'),
+            'indexLabel': 'oro.issue.entity_plural.label'|trans,
+            'entityTitle': entity.summary
         } %}
         {{ parent() }}
     {% else %}
@@ -37,15 +37,15 @@
     {
     'title': '',
     'data': [
-    form_row(form.code),
-    form_row(form.summary),
-    form.type is defined ? form_row(form.type) : '',
-    form_row(form.description),
-    form_row(form.priority),
-    form_row(form.assignee),
-    form_row(form.related),
-    form.owner is defined ? form_row(form.owner) : '',
-    form_row(form.tags)
+        form_row(form.code),
+        form_row(form.summary),
+        form.type is defined ? form_row(form.type) : '',
+        form_row(form.description),
+        form_row(form.priority),
+        form_row(form.assignee),
+        form_row(form.related),
+        form.owner is defined ? form_row(form.owner) : '',
+        form_row(form.tags)
     ]
     }
     ]
@@ -57,11 +57,11 @@
     {% endfor %}
     {% if additionalData is not empty %}
         {% set dataBlocks = dataBlocks|merge([{
-        'title': 'Additional'|trans,
-        'subblocks': [{
-        'title': '',
-        'useSpan': false,
-        'data' : additionalData
+            'title': 'Additional'|trans,
+            'subblocks': [{
+            'title': '',
+            'useSpan': false,
+            'data' : additionalData
         }]
         }] ) %}
     {% endif %}
@@ -71,8 +71,3 @@
     } %}
     {{ parent() }}
 {% endblock content_data %}
-
-
-
-
-

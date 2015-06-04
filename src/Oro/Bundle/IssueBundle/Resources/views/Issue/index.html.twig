@@ -12,11 +12,11 @@
     {% endif %}
 
     {% include 'OroImportExportBundle:ImportExport:buttons.html.twig' with {
-    entity_class:            entity_class,
-    importProcessor:         'oro_issue',
-    exportProcessor:         'oro_issue',
-    exportTemplateProcessor: 'oro_issue',
-    dataGridName:             gridName
+        entity_class:            entity_class,
+        importProcessor:         'oro_issue',
+        exportProcessor:         'oro_issue',
+        exportTemplateProcessor: 'oro_issue',
+        dataGridName:             gridName
     } %}
 
 {% endblock %}

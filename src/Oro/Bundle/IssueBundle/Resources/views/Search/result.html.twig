@@ -7,12 +7,13 @@
 {% set showImage = false %}
 {% set image = null %}
 
-{% set entityInfo = [
-{'title': 'oro.issue.code_label'|trans, 'value': entity.code},
-{'title': 'oro.issue.summary_label'|trans, 'value': entity.summary},
-{'title': 'oro.issue.priority_label'|trans, 'value': entity.priority.label},
-{'title': 'oro.issue.workflow_step_label'|trans, 'value': entity.workflowStep ? entity.workflowStep.label : ''},
-{'title': 'oro.issue.reporter_label'|trans, 'value': entity.reporter},
-{'title': 'oro.issue.assignee_label'|trans, 'value': entity.assignee},
-]
+{% set entityInfo =
+    [
+        {'title': 'oro.issue.code.label'|trans, 'value': entity.code},
+        {'title': 'oro.issue.summary.label'|trans, 'value': entity.summary},
+        {'title': 'oro.issue.priority.label'|trans, 'value': entity.priority.label},
+        {'title': 'oro.issue.workflow_step.label'|trans, 'value': entity.workflowStep ? entity.workflowStep.label : ''},
+        {'title': 'oro.issue.reporter.label'|trans, 'value': entity.reporter},
+        {'title': 'oro.issue.assignee.label'|trans, 'value': entity.assignee},
+    ]
 %}

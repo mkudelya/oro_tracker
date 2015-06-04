@@ -4,7 +4,7 @@ oro_issue_bundle:
     prefix:       /issue
 
 oro_issue_bundle_api:
-    resource:     "@OroIssueBundle/Controller/Api/Rest/IssueController.php"
+    resource:     "@OroIssueBundle/Resources/config/oro/routing_api.yml"
     type:         rest
     prefix:       api/rest/{version}/
     requirements:

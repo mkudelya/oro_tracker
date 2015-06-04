@@ -5,9 +5,17 @@ oro_menu_config:
             route: 'oro_issue_index'
             extras:
                 position: 1
+        shortcut_new_issue:
+            label: 'oro.menu.shortcut_new_issue.label'
+            route: 'oro_issue_create'
+            extras:
+                isCustomAction: true
     tree:
         application_menu:
             children:
                 activities_tab:
                     children:
                         issue_list: ~
+        shortcuts:
+            children:
+                shortcut_new_issue: ~

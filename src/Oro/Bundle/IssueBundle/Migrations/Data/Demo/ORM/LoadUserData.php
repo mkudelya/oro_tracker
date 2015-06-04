@@ -18,15 +18,6 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
     /** @var ContainerInterface */
     private $container;
 
-    /** @var  EntityRepository */
-    protected $roles;
-
-    /** @var  EntityRepository */
-    protected $group;
-
-    /** @var UserRepository */
-    protected $user;
-
     /**
      * Set container
      * @param ContainerInterface $container
@@ -34,10 +25,6 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container  = $container;
-        /** @var  EntityManager $entityManager */
-        $entityManager    = $container->get('doctrine.orm.entity_manager');
-        $this->roles      = $entityManager->getRepository('OroUserBundle:Role');
-        $this->user       = $entityManager->getRepository('OroUserBundle:User');
     }
 
     /**
@@ -46,11 +33,16 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
     public function load(ObjectManager $manager)
     {
         $organization = $manager->getRepository('OroOrganizationBundle:Organization')->getFirst();
-        $adminRole = $this->roles->findOneBy(array('role' => 'ROLE_ADMINISTRATOR'));
+        $adminRole = $manager
+            ->getRepository('OroUserBundle:Role')
+            ->findOneBy(array('role' => 'ROLE_ADMINISTRATOR'));
         $userManager = $this->container->get('oro_user.manager');
         $businessUnit = $manager->getRepository('OroOrganizationBundle:BusinessUnit')->findOneBy(['name' => 'Main']);
         $this->addReference('default_organization', $organization);
-        $this->addReference('user_admin', $this->user->findOneBy(array('username' => 'admin')));
+        $this->addReference(
+            'user_admin',
+            $manager->getRepository('OroUserBundle:User')->findOneBy(array('username' => 'admin'))
+        );
         $manager = $userManager->createUser();
         $manager
             ->setUsername('manager')
@@ -64,7 +56,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
             ->setBusinessUnits(
                 new ArrayCollection(
                     array(
-                        $businessUnit,
+                        $businessUnit
                     )
                 )
             );
@@ -83,7 +75,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface
             ->setBusinessUnits(
                 new ArrayCollection(
                     array(
-                        $businessUnit,
+                        $businessUnit
                     )
                 )
             );

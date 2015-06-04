@@ -12,13 +12,12 @@ class NoteTest extends WebTestCase
 {
     protected function setUp()
     {
-        $this->initClient(array(), $this->generateBasicAuthHeader());
+        $this->initClient([], $this->generateBasicAuthHeader());
 
         $this->loadFixtures(
-            array(
-                'Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures\LoadPriorityData',
-                'Oro\Bundle\IssueBundle\Tests\Fixtures\IssueData'
-            )
+            [
+                'Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures\LoadIssueData'
+            ]
         );
     }
 

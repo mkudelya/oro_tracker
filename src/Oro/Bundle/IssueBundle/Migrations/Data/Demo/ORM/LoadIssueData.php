@@ -3,7 +3,6 @@ namespace Oro\Bundle\IssueBundle\Migrations\Data\Demo\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -17,17 +16,17 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
     private $container;
 
     /** @var array $issues */
-    protected $issues = array(
-        array(
+    protected static $issues = [
+        [
             'summary'  => 'My new story',
             'code'  => 'new story',
             'type'     => 'story',
             'reporter' => 'user_manager',
             'assignee' => 'user_admin',
             'owner' => 'user_user',
-            'priority' => 'major',
-        ),
-        array(
+            'priority' => 'major'
+        ],
+        [
             'summary'  => 'Create database',
             'code'  => 'database',
             'type'     => 'task',
@@ -35,9 +34,9 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
             'assignee' => 'user_user',
             'owner' => 'user_user',
             'priority' => 'major',
-            'subtask' => true,
-        ),
-        array(
+            'subtask' => true
+        ],
+        [
             'summary'  => 'Issue CRUD',
             'code'  => 'crud',
             'type'     => 'task',
@@ -45,27 +44,27 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
             'assignee' => 'user_user',
             'owner' => 'user_user',
             'priority' => 'major',
-            'subtask' => true,
-        ),
-        array(
+            'subtask' => true
+        ],
+        [
             'summary'  => 'Management',
             'code'  => 'management',
             'type'     => 'task',
             'reporter' => 'user_manager',
             'assignee' => 'user_manager',
             'owner' => 'user_user',
-            'priority' => 'minor',
-        ),
-        array(
+            'priority' => 'minor'
+        ],
+        [
             'summary'  => 'Estimates',
             'code'  => 'estimates',
             'type'     => 'task',
             'reporter' => 'user_manager',
             'assignee' => 'user_user',
             'owner' => 'user_user',
-            'priority' => 'major',
-        ),
-    );
+            'priority' => 'major'
+        ]
+    ];
 
     /**
      * {@inheritdoc}
@@ -73,7 +72,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
     public function getDependencies()
     {
         return [
-            'Oro\Bundle\IssueBundle\Migrations\Data\Demo\ORM\LoadUserData',
+            'Oro\Bundle\IssueBundle\Migrations\Data\Demo\ORM\LoadUserData'
         ];
     }
 
@@ -93,11 +92,11 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
     public function load(ObjectManager $manager)
     {
         $organization = $this->getReference('default_organization');
-        $users = array(
+        $users = [
             'user_admin' => $this->getReference('user_admin'),
             'user_manager' => $this->getReference('user_manager'),
-            'user_user' => $this->getReference('user_user'),
-        );
+            'user_user' => $this->getReference('user_user')
+        ];
 
         $priorityRepository = $manager->getRepository('OroIssueBundle:IssuePriority');
 
@@ -108,7 +107,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
 
         $story = null;
 
-        foreach ($this->issues as $data) {
+        foreach (self::$issues as $data) {
             $issue = new Issue();
             $issue->setOrganization($organization);
             $issue->setSummary($data['summary']);
@@ -120,7 +119,7 @@ class LoadIssueData extends AbstractFixture implements ContainerAwareInterface, 
             $issue->setType($data['type']);
             $issue->setPriority($priorities[$data['priority']]);
 
-            if ($data['type'] == 'story') {
+            if ($data['type'] === 'story') {
                 $story = $issue;
             }
 

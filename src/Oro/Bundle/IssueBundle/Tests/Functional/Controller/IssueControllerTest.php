@@ -47,7 +47,6 @@ class IssueControllersTest extends WebTestCase
         $form = $crawler->selectButton('Save and Close')->form();
         $form['oro_issue[code]'] = 'new code subissue';
         $form['oro_issue[summary]'] = 'summary';
-        $form['oro_issue[type]'] = 'story';
 
         $this->client->followRedirects(true);
         $crawler = $this->client->submit($form);

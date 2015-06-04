@@ -11,27 +11,22 @@ use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
 class IssueControllerTest extends WebTestCase
 {
     /** @var array */
-    protected $issue = array(
-        'oro_issue_api' => array(
+    protected $issue = [
+        'oro_issue_api' => [
             'code' => 'new code',
             'summary' => 'summary',
             'type' => 'task',
             'owner' => '1',
             'assignee' => '1',
-            'reporter' => '1',
             'priority' => '1'
-        )
-    );
+        ]
+    ];
 
     protected function setUp()
     {
         $this->initClient(array(), $this->generateWsseAuthHeader());
 
-        $this->loadFixtures(
-            array(
-                'Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures\LoadPriorityData',
-            )
-        );
+        $this->loadFixtures(['Oro\Bundle\IssueBundle\Tests\Functional\DataFixtures\LoadPriorityData']);
     }
 
     public function testCreate()
@@ -75,6 +70,7 @@ class IssueControllerTest extends WebTestCase
     public function testPut($id)
     {
         $updatedIssue = $this->issue;
+        unset($updatedIssue['oro_issue_api']['type']);
         $updatedIssue['oro_issue_api']['summary'] = 'Updated summary';
         $this->client->request('PUT', $this->getUrl('oro_api_put_issue', ['id' => $id]), $updatedIssue);
         $result = $this->client->getResponse();

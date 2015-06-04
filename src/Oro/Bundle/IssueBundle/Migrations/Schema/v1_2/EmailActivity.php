@@ -1,6 +1,6 @@
 <?php
 
-namespace Oro\Bundle\BtsBundle\Migrations\Schema\v1_2;
+namespace Oro\Bundle\IssueBundle\Migrations\Schema\v1_2;
 
 use Doctrine\DBAL\Schema\Schema;
 

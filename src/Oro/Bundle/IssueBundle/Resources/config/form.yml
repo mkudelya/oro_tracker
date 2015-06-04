@@ -51,8 +51,7 @@ services:
             - @oro_issue.form.api
             - @request
             - @doctrine.orm.entity_manager
-            - @oro_activity.manager
-            - @oro_entity.routing_helper
+            - @oro_security.security_facade
         tags:
             - { name: oro_tag.tag_manager }
 
